@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+#writeMessageDialog{
+	background-color:#efefef;
+	margin:0;
+}
+button.match-selector{
+	height:22px;
+	width:61px;
+	background:url(../img/blue/inbox/selectbutton.png) no-repeat;
+	border:none;
+	background-position:0 -46px;
+}
+button.match-selector:hover{
+	background-position:0 -23px;
+}
+button.match-selector:active{
+	background-position:0 0px;
+}
+
+.dialog-content{
+	width:450px;
+}
+.dialog-content dt{
+	width:75px;
+	text-align:right;
+	font-weight:normal;
+}

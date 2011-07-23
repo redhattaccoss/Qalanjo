@@ -1,0 +1,437 @@
+.banner-container {
+	margin: 15px 0 15px 0;
+	width: 914px;
+	min-height: 116px;
+}
+
+.banner-container img {
+	margin-left: 20px;
+}
+
+.container-left-side {
+	margin: 0 20px 20px 20px;
+	width: 600px;
+	min-height: 500px;
+	background: #fff;
+	padding: 0px;
+}
+
+.container-left-side .profile-pic-frame {
+	width: 140px;
+	list-style: none;
+	list-style-type: none;
+	margin-bottom: 10px;
+	padding: 0px;
+	background: #FFF;
+	display: inline-block;
+	text-decoration: none;
+}
+
+.profile-pic-frame li a {
+	font: normal 12px Arial, Helvetica, sans-serif;
+	color: #116AA4;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.user-status {
+	width: 117px;
+	min-height: 24px;
+	background: #CCC;
+}
+
+.user-status img {
+	width: 117px;
+	min-height: 24px;
+	background: #CCC;
+}
+
+li.online-ofline {
+	background: url(../img/blue/viewprofile/online.png) -20px 0px no-repeat;
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	height: 24px;
+	padding: 3px 0 3px 30px;
+	margin: .4em 0;
+}
+li.offline {
+	background: url(../img/blue/viewprofile/offline.png) -20px 0px no-repeat;
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	height: 24px;
+	padding: 3px 0 3px 30px;
+	margin: .4em 0;
+}
+
+
+
+li.messageicon {
+	background: url(../img/blue/viewprofile/messageicon.jpg) -20px 0px no-repeat;
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	padding: 3px 0 3px 30px;
+	margin: .4em 0;
+}
+
+li.winkicon {
+	background: url(../img/blue/viewprofile/winkicon.jpg) -20px 0px no-repeat;
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	padding: 3px 0 3px 30px;
+	margin: .4em 0;
+}
+
+li.gifticon {
+	background: url(../img/blue/viewprofile/gifticon.jpg) -20px 0px no-repeat;
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	padding: 3px 0 3px 30px;
+	margin: .4em 0;
+}
+
+.container-left-side img {
+	margin: 0 0 12px 0;
+	min-width: 120px;
+	min-height: 120px;
+	background: #999;
+	display: inline-block;
+}
+
+.complete-name {
+	margin: 0;
+	min-width: 454px;
+	min-height: 244x;
+	background: #FFF;
+	text-align: left;
+	display: inline-block;
+}
+
+.complete-name h2 {
+	font: 20px;
+	font-weight: bold;
+	color: #005F9D;
+	display: inline-block;
+}
+
+.complete-name .address {
+	margin: -20px 0 0 0;
+	padding: 0px;
+	list-style: none;
+	list-style-type: none;
+}
+
+.mypassion-tab {
+	margin-top: 10px;
+	padding: 0px;
+	min-width: 430px;
+	min-height: 44px;
+	background: url(../img/blue/viewprofile/bottombluemessage.jpg) bottom
+		repeat-x;
+}
+
+.mypassion-tab ul {
+	display: inline-block;
+	float: left;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.mypassion-tab ul li.active a {
+	display: block;
+	height: 38px;
+	padding: 10px 10px 0 10px;
+	float: left;
+	text-decoration: none;
+	background: url(../img/blue/viewprofile/arrowbottom.png) bottom center
+		no-repeat #005F9D;
+	font-size: 13px;
+	text-align: center;
+	color: #fff;
+}
+
+.mypassion-tab ul li {
+	display: block;
+	height: 32px;
+	padding: 2px 10px 0 10px;
+	float: left;
+	text-decoration: none;
+	background: #FFF;
+	cursor:pointer;
+}
+
+.main-container-profile-pic {
+	min-height: 254px;
+	margin-bottom: 20px;
+}
+
+.mypassion-container {
+	margin-top: 0px;
+	width: 452px;
+	min-height: 82px;
+	background: #EFF7FC;
+	border-bottom-left-radius: 6px 6px;
+	border-bottom-right-radius: 6px 6px;
+	border: 1px solid #CCC;
+	text-align: justify;
+	margin-bottom: 0px;
+	display: inline-block;
+}
+.mypassion-container p {
+	margin: 20px;
+	text-align: justify;
+}
+
+.about-me {
+	display: inline;
+	margin-top: 20px;
+}
+
+.about-me h4 {
+	font: 12px;
+	height: 20px;
+	font-weight: bold;
+	color: #6BAA3E;
+	display: inline-block;
+	background: url(../img/blue/viewprofile/headerback.jpg) bottom repeat-x;
+}
+
+.info-container {
+	margin-top: -18px;
+	border-top: 1px solid #005F9D;
+	min-height: 126px;
+	background: url(../img/blue/viewprofile/divback.jpg) top repeat-x;
+	margin-bottom: 20px;
+	display: block;
+	overflow:hidden;
+}
+
+.about-me dl.basic-information-dl {
+	display: block;
+	float: left;
+	margin: 0px 31px 30px 31px;
+	margin-top: 20px;
+	margin-right: 31px;
+	margin-bottom: 20px;
+	margin-left: 31px;
+	overflow:hidden;
+}
+
+.about-me dl.basic-information-dl dt {
+	display: block;
+	float: left;
+	clear: both;
+	width: 100px;
+	text-align: left;
+	margin-bottom: 5px;
+}
+
+.about-me dl.basic-information-dl dd {
+	display: block;
+	float: left;
+}
+
+.about-me dl.in-my-own-words-dl {
+	display: block;
+	margin-top: 20px;
+	float: left;
+	margin-left: 31px;
+}
+
+span.orangecolor {
+	font-size: 20px;
+	font-weight: bolder;
+	color: #FF9006;
+}
+
+span.greencolor {
+	font-size: 20px;
+	font-weight: bolder;
+	color: #6BAA3E;
+}
+
+.about-me dl.in-my-own-words-dl dt {
+	color: #33669D;
+	font-size: 12px;
+	clear: both;
+	margin-bottom: 10px;
+}
+
+.about-me dl.in-my-own-words-dl dd {
+	font-size: 12px;
+	margin-bottom: 15px;
+	margin-left: 0px;
+	padding: 0px;
+}
+
+.about-me dl.in-my-own-words-dl div.column {
+	display: block;
+	float: left;
+	width: 268px;
+	min-height: 100px;
+	margin: 0px;
+	padding: 0px 10px 0px 0px;
+}
+
+.about-me  dl.in-my-own-words-dl ul {
+	margin: 0px;
+}
+
+.about-me dl.in-my-own-words-dl div.last {
+	padding: 0px 0px 0px 10px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+}
+
+.container-right-side {
+	margin: 0 20px 20px 0px;
+	width: 264px;
+	min-height: 500px;
+	background: #FFF;
+}
+
+.archive-match {
+	text-align: right;
+	background: url(../img/blue/viewprofile/bottomarchive.png) bottom center
+		no-repeat #FFF;
+	min-height: 74px;
+	min-width: 264px;
+	font-size: 11px;
+	margin-bottom: 20px;
+}
+
+.archive-match a {
+	text-decoration: none;
+}
+
+.archive-match img {
+	text-decoration: none;
+	margin-left: 6px;
+}
+
+.archive-match span {
+	text-align: right;
+	color: #6BAA3E;
+	text-decoration: none;
+}
+
+.topic-opener-header {
+	background: url(../img/blue/viewprofile/topicopenerback.jpg) center repeat-x
+		#CCC;
+	min-height: 44px;
+	min-width: 264px;
+	border: 1px solid #D3D3D3;
+}
+
+.topic-opener-header h3 {
+	font-size: 16px;
+	font-weight: bold;
+	color: #005F9D;
+	margin: 12px 0 0 12px;
+}
+
+.topic-opener-container {
+	display: block;
+	margin-bottom: 15px;
+	min-height: 44px;
+	min-width: 264px;
+	margin-bottom: 20px;
+	border: 1px solid #D3D3D3;
+	border-top: none;
+	background: #FBFBFB;
+}
+
+.topic-opener-container a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.topic-opener-container li {
+	margin-left: 10px;
+	text-decoration: none;
+	list-style: none;
+}
+
+.topic-opener-container>dl>dd>ul>li {
+	padding-left: 40px;
+	margin-bottom: 10px;
+	min-height: 29px;
+}
+
+.topic-opener-container>dl>dd {
+	margin-left: 0px;
+}
+
+.topic-opener-container dt {
+	margin: 10px 0 10px 20px;
+}
+
+.topic-opener-container ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+li.travel {
+	background: url(../img/blue/viewprofile/travelicon.png) 0px 0px no-repeat;
+	background-repeat: no-repeat;
+}
+
+li.pets {
+	background: url(../img/blue/viewprofile/petsicon.png) 0px 0px no-repeat;
+	background-repeat: no-repeat;
+}
+
+li.books {
+	background: url(../img/blue/viewprofile/bookicon.png) 0px 0px no-repeat;
+	background-repeat: no-repeat;
+}
+
+li.time {
+	background: url(../img/blue/viewprofile/timeicon.png) 0px 0px no-repeat;
+	background-repeat: no-repeat;
+}
+
+.communication-advice-header {
+	background: url(../img/blue/viewprofile/comadvice.jpg) center repeat-x #CCC;
+	min-height: 30px;
+	min-width: 264px;
+	border: 1px solid #D3D3D3;
+}
+
+.communication-advice-header h3 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000;
+	margin: 6px 0 0 6px;
+	text-align: center;
+}
+
+.communication-advice-container {
+	display: inline-block;
+	width: 264px;
+	margin-bottom: 20px;
+	border: 1px solid #D3D3D3;
+	border-top: none;
+	background: #FBFBFB;
+}
+
+.communication-advice-container ul li {
+	border: none;
+	margin-top: 20px;
+	font-size: 11px;
+	text-align: left;
+	min-height: 44px;
+	list-style: none;
+	list-style-type: none;
+	min-height: 100px;
+	padding-bottom: 10px;
+	background: url(../img/blue/viewprofile/line.png) no-repeat bottom;
+}
+
+.communication-advice-container img {
+	border: none;
+	margin: 0px;
+}

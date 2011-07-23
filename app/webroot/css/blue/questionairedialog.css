@@ -1,0 +1,115 @@
+
+
+.container-dialog {
+	width: 778px;
+	height: 417px;
+	margin: 100px auto 0 auto;
+	border: 2px solid #1F497D;
+	border-radius: 10px;
+	background: url(../img/blue/questionairedialog/logo.png) no-repeat 30px
+		340px, url(../img/blue/questionairedialog/imagegirl.png) no-repeat
+		419px 6px #F4F5F8;
+	display: none;
+	position:absolute;
+	z-index:1000;
+}
+
+.title-barleft {
+	width: 700px;
+	min-height: 82px;
+	margin: 18px 0 20px -16px;
+	background: url(../img/blue/questionairedialog/ModalQuestions_r2_c2.png)
+		no-repeat;
+}
+
+.title-bar {
+	width: 412px;
+	min-height: 64px;
+	border-radius: 8px;
+	margin: 0;
+	background: url(../img/blue/questionairedialog/iconwrite.png) no-repeat
+		20px 4px #1F497D;
+}
+
+.title-bar h2 {
+	font-size: 22px;
+	color: #fff;
+	font-weight: bold;
+	margin: 12px 0 0px 80px;
+}
+
+.title-bar h2 span {
+	font-size: 22px;
+	color: #85B614;
+	font-weight: bold;
+}
+
+.box-content {
+	width: 369px;
+	min-height: 208px;
+	border-radius: 8px;
+	margin-left: 22px;
+	margin-right: 0px;
+	border: 1px solid #9AC810;
+	background: #fff;
+	float: left;
+}
+
+.box-content p {
+	margin: 30px;
+	text-align: justify;
+	font-size: 14px;
+	font-style: italic;
+}
+
+.button-set {
+	margin: 180px 88px 0 0;
+	width: 184px;
+	height: 162px;
+	background: url(../img/blue/questionairedialog/buttonback.png) no-repeat;
+}
+
+.button-set .buttontest {
+	background: url(../img/blue/questionairedialog/testbutton.png) no-repeat;
+	height: 82px;
+	width: 184px;
+	border: none;
+	cursor: pointer;
+}
+
+.button-set .buttontest:hover {
+	background-position: 0px -84px;
+}
+
+.button-set .buttontest:active {
+	background-position: 0px -168px;
+}
+
+.button-setclose {
+	margin: -24px -14px 0 0;
+}
+
+.button-setclose .buttonclose {
+	background: url(../img/blue/questionairedialog/closebutton.png)
+		no-repeat;
+	height: 33px;
+	width: 33px;
+	border: none;
+	cursor: pointer;
+}
+
+.button-setclose .buttonclose:hover {
+	background-position: 0px -34px;
+}
+
+.button-setclose .buttonclose:active {
+	background-position: 0px -68px;
+}
+
+.skipthis {
+	color: #005F9D;
+	font-size: 14px;
+	font-weight: bolder;
+	margin-top: 30px;
+	cursor: pointer;
+}
