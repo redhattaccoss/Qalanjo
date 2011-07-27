@@ -16,7 +16,7 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	$(".paypal-pay").click(function(e){
-		window.location.href=qalanjo_url+"qpoints/checkout_paypal/"+currentId;
+		window.location.href=qalanjo_url+"coin_avail_transactions/checkout_paypal/"+currentId;
 		e.preventDefault();
 	});
 	$(".cc-pay").click(function(e){

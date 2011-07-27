@@ -27,11 +27,9 @@ class SubscriptionTransactionsController extends AppController {
 		$this->layout = "blue_full_block";
 		$this->loadModel("CreditType");
 		$this->loadModel("SubscriptionType");
-		$types = $this->SubscriptionType->find("all");
+		$types = $this->SubscriptionType->find("all", array("recursive"=>-1));
 		$this->set("process", "subscribe_details");
 		$this->set("types", $types);
-
-		
 	}
 	
 	function details_quick(){
@@ -55,9 +53,12 @@ class SubscriptionTransactionsController extends AppController {
 			$this->Session->write("Payment.amount", $type["SubscriptionType"]["price"]);
 			$paymentInfo["Payment"]["returnURL"] ="http://".$_SERVER['SERVER_NAME'] . $this->base."/subscription_transactions/success_paypal/".$key;
 			$paymentInfo["Payment"]["cancelURL"] ="http://".$_SERVER['SERVER_NAME'] . $this->base."/subscription_transactions/cancel_paypal/".$key;
-			$this->PaypalService->callShortcutExpressCheckout($paymentInfo);
+			$res = $this->PaypalService->callShortcutExpressCheckout($paymentInfo);
+			debug($res);
 			if ($this->Session->check("TOKEN")){
 				$this->PaypalService->redirectToPaypal($this->Session->read("TOKEN"));
+			}else{
+				$this->redirect("/subscribe");
 			}
 		}else{
 			$this->redirect("/subscribe");
@@ -67,6 +68,7 @@ class SubscriptionTransactionsController extends AppController {
 	
 	function checkout_recur_paypal($type=-1){
 		$this->loadModel("SubscriptionType");
+		$this->Session->write("TOKEN", null);
 		if ($type!=-1){
 			$type = $this->SubscriptionType->find("first", array("conditions"=>array("SubscriptionType.id"=>$type), "recursive"=>-1));
 			$paymentInfo["Payment"]["paymentType"] = "Sale";
@@ -77,13 +79,15 @@ class SubscriptionTransactionsController extends AppController {
 			$this->Session->write("Payment.transaction", $key);
 			$this->Session->write("Payment.type", $type);
 			$this->Session->write("Payment.amount", $type["SubscriptionType"]["price"]);
-			$paymentInfo["Payment"]["returnURL"] ="http://".$_SERVER['SERVER_NAME'] . $this->base."/subscription_transactions/success_recur_paypal/".$key;
-			$paymentInfo["Payment"]["cancelURL"] ="http://".$_SERVER['SERVER_NAME'] . $this->base."/subscription_transactions/cancel_paypal/".$key;
+			$paymentInfo["Payment"]["returnURL"] ="https://".$_SERVER['SERVER_NAME'] . $this->base."/subscription_transactions/success_recur_paypal/".$key;
+			$paymentInfo["Payment"]["cancelURL"] ="https://".$_SERVER['SERVER_NAME'] . $this->base."/subscription_transactions/cancel_paypal/".$key;
 			$paymentInfo["Payment"]["startDate"] = urlencode(date("Y-M-d")."T".date("h:m:s")."Z");
 			
 			$this->PaypalService->recurringPayment($paymentInfo);
 			if ($this->Session->check("TOKEN")){
 				$this->PaypalService->redirectToPaypal($this->Session->read("TOKEN"));
+			}else{
+				$this->redirect("/subscribe");
 			}
 		}else{
 			$this->redirect("/subscribe");
@@ -91,16 +95,18 @@ class SubscriptionTransactionsController extends AppController {
 	}
 	function success_paypal($key){
 		if ($this->Session->check("TOKEN")){
-			$this->PaypalService->getShippingDetails($this->Session->read("TOKEN"));
+			$res = $this->PaypalService->getShippingDetails($this->Session->read("TOKEN"));
 			if ($this->Session->check("Payment.payerId")){
 				$result = $this->PaypalService->confirmPayment($this->Session->read("Payment.amount"));
 				if ($result["ACK"]=="Success"){
 					$this->data["SubscriptionTransaction"]["payment_method_id"] = 2;
-					$this->data["SubscriptionTransaction"]["transaction_code"] = "";
+					$this->data["SubscriptionTransaction"]["transaction_code"] = $result["PAYMENTINFO_0_TRANSACTIONID"];
 					$this->data["SubscriptionTransaction"]["member_id"] = $this->Session->read("Member.id");
-					$type =$this->Session->read("type");
+					$type =$this->Session->read("Payment.type");
 					$this->data["SubscriptionTransaction"]["subscription_type_id"] = $type["SubscriptionType"]["id"];
 					$this->Session->write("transaction", null);
+					
+					$this->SubscriptionTransaction->begin($this->SubscriptionTransaction);
 					$this->SubscriptionTransaction->create($this->data);						
 					if ($this->SubscriptionTransaction->save($this->data, false)){
 						$this->loadModel("Member");
@@ -108,6 +114,9 @@ class SubscriptionTransactionsController extends AppController {
 						$this->Member->updateRole(3, $member_id);
 						$this->Session->setFlash("Transaction has been processed", "default", array("class"=>"success"));
 						$this->redirect("http://".$_SERVER['SERVER_NAME'] . $this->base."/subscription_transactions/success");
+						$this->SubscriptionTransaction->commit($this->SubscriptionTransaction);
+					}else{
+						$this->SubscriptionTransaction->rollback($this->SubscriptionTransaction);
 					}
 				}else{			
 					$this->redirect("/subscribe");
@@ -178,6 +187,7 @@ class SubscriptionTransactionsController extends AppController {
 						$this->Session->write("SubscriptionResult", $result);
 						$this->data["SubscriptionTransaction"]["payment_method_id"] = 1;
 						$this->data["SubscriptionTransaction"]["transaction_code"] = $result["TRANSACTIONID"];
+						$this->data["SubscriptionTransaction"]["subscription_type_id"] = $type;
 						$this->data["SubscriptionTransaction"]["member_id"] = $this->Session->read("Member.id");
 						$this->SubscriptionTransaction->create($this->data);						
 						if ($this->SubscriptionTransaction->save($this->data, false)){
@@ -237,7 +247,7 @@ class SubscriptionTransactionsController extends AppController {
 	}
 	
 	function error(){
-		
+		$this->layout = "blue_full_block";
 	}
 	
 	

@@ -368,7 +368,7 @@
 									?>
 										<li>
 											<?php 
-											echo $profile["MemberProfile"]["life_skill_".$i]
+											echo $profile["MemberProfile"]["thankful_".$i]
 											?>
 										</li>
 									<?php
@@ -432,21 +432,27 @@
 					</dt>
 					<dd>
 						<ul>
-							<li>
-								Love
-							</li>
-							<li>
-								Communication
-							</li>
-							<li>
-								Transportation
-							</li>
-							<li>
-								Tools of my Trades
-							</li>
-							<li>
-								Kiddos
-							</li>
+							<?php
+								$count = 0;
+								for($i=1;$i<=5;$i++){
+									if ($profile["MemberProfile"]["live_without_".$i]!=""){
+									
+									?>
+										<li>
+											<?php 
+											echo $profile["MemberProfile"]["live_without_".$i]
+											?>
+										</li>
+									<?php
+									}else{
+										$count++;
+									}
+								}
+								if ($count==3){
+									echo "&lt;not answered&gt;";
+								}
+							
+							?>
 						</ul>
 					</dd>
 				</div>
@@ -456,7 +462,7 @@
 					</dt>
 					<dd>
 						<?php
-							if ($profile["MemberProfile"]["first_people_notice"]!=""){ 
+							if ($profile["MemberProfile"]["people_notice"]!=""){ 
 								echo $profile["MemberProfile"]["first_people_notice"];
 							}else{
 								echo "&lt;not answered&gt;";

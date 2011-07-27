@@ -67,7 +67,7 @@
 				echo $this->element("blue/profile_building/radioset", array("order"=>array(0, 4)));
 			?>
 		</ul>
-        <h2 class="floatpart"><span>Openness</span><span class="line"></span></h2>
+        <h2 class="floatpart"><span>Career</span><span class="line"></span></h2>
         <ul class="block-set block-set-blue item-set-job">
         	<?php 
 				echo $this->element("blue/profile_building/radioset", array("order"=>array(1, 2, 3)));

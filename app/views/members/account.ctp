@@ -1,3 +1,11 @@
+<?php 
+	$call = -1;
+	echo $html->scriptBlock("
+		var call = $call;
+	");
+
+?>
+
 <div class="content-container">
 	<div class="settings-container left">
 		<div class="left settings-header">					

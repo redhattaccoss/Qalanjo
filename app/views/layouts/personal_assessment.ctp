@@ -22,8 +22,7 @@
         </div>
         <div class="container-main left">
             <div class="header left">
-                <div class="logo left">
-                </div>
+                <?php echo $html->link(" ", "/welcome", array("class"=>"logo left"))?>
                 <div class="couple-top left">
                 </div>
                 <div class="communicate left">

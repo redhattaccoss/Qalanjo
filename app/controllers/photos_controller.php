@@ -105,7 +105,12 @@ class PhotosController extends AppController {
 		$list = $this->Member->getAlbumsList($member_id);
 		//debug(array_keys($list));
 		if(!$owner_id) { //if owner_id not specified.. render the viewers own profile
-			$owner_id = $member_id;
+			$owner_id = $member_id;	
+		}else{
+			$role = $this->Member->getRole($member_id);
+			if ($role==2){
+				$this->redirect("/subscribe");
+			}
 		}
 		
 		if($this->Member->isExisting($owner_id)) { //check if owner really exist..

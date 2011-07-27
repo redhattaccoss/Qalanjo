@@ -60,7 +60,7 @@
 	
 						<label>
 							<?php 
-								echo $form->input("MemberProfile.passionate_about", array("rows"=>50, "cols"=>5, "div"=>false, "class"=>"Multilinebox", "label"=>false));
+								echo $form->input("MemberProfile.looking_for_details", array("rows"=>50, "cols"=>5, "div"=>false, "class"=>"Multilinebox", "label"=>false));
 	                        ?>
 						</label>
 						<br />

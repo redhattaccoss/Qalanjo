@@ -60,8 +60,8 @@ class AttributesController extends AppController {
 		}
 		
 		if ($page==7){
-			$this->Member->save_progress($member_id, "complete");
-			$this->redirect("/");
+			$this->Member->save_progress($member_id, "reciprocals/match_preference");
+			$this->redirect("/reciprocals/match_preference");
 		}
 		$this->set("member_id", $member_id);
 		$this->set("page", $page);

@@ -8,6 +8,7 @@ var current_message = -1;
 var tabsContent = new Array();
 var tabCount = 0;
 var loadCountSucceed = true;
+var searching = false;
 function autocomplete_searchmail(){
 	$("#search_mail").autocomplete({
 		source:qalanjo_url+"private_messages/autocomplete/",
@@ -219,6 +220,13 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	
+	$("#search-matches").live("keypress", function(e){
+		$.post(qalanjo_url+"matches/search/4/2", $("#match-search").serialize(), function(data){
+			$("#match-list-inbox").html(data);
+		});
+		
+	});
+	
 	$("#move_trash").live("click", function(e){
 		$("#action").val(3);
 		$.post(qalanjo_url+"receive_messages/delete_selected", $("#selector").serialize(), function(data){
@@ -252,6 +260,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		e.stopPropagation();
 	});
+	
 	$(".delete-batch").live("click", function(e){
 		var url = $(this).attr("href");
 		$("#deletebox").dialog(

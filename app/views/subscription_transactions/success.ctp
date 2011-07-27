@@ -1,22 +1,32 @@
-<div class="content-container">
-	<div id="success-wrap" class="span-24">
-		<div class="span-6">
-		<?php 
-			echo $html->image("designs/blue/subscription_transactions/success/EmptyCart-success.png");
-		?>
-		</div>
-		<div id="success" class="left">
-			<div id="success-cont" class="left">
-				<div id="success-text-container" class="left">
-					<h2>Your order has succesfully processed.</h2>
-					<p>You are now a subscribe member of Qalanjo.com. Please enjoy the benefits and happy matching.</p>
+<h1 class="forgot"> Subscription</h1>
+<div class="subscription-cap left">
+	<h2> Thank you for your Order!</h2>
+	<div class="shadow">
+	</div>
+</div>
+<div class="floatimage">
+</div>
+<div class="left clear orange-side">
+</div>
+<div class="left subscription-main-container">
+	<form action="#" method="POST">
+		<div class="subscription-coupleback">
+			<div class="subscription-form">
+				<div class="subscriptionsuccess">
+					<h4>
+					Your order has successfully processed.
+					<br />
+					</h4>
 				</div>
 			</div>
-			<div id="btn-wrap" class="clear">
-					<div id="button" class="clear">
-						<p>Back to Main</p>
-					</div>
+		</div>
+		<div class="buttonset">
+			<div class="right">
+				<button type="submit" class="send-instruction">
+				</button>
 			</div>
 		</div>
-	</div>
+	</form>
+</div>
+<div class="left orange-side">
 </div>

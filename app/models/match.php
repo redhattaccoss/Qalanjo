@@ -147,19 +147,36 @@ class Match extends AppModel {
 	
 	function searchMatches($member_id, $query, $type=1){
 		$this->unbindModel(array("belongsTo"=>array("Member")));
-		$matches = $this->find("all", array("conditions"=>array("Match.member_id"=>$member_id, "Match.match_status_id"=>$type,"MATCH(Matched.lastname,Matched.firstname)  
-		          AGAINST('$query*' IN BOOLEAN MODE)"),
-			 "order"=>"Match.created DESC",
-			 "recursive"=>1,
-			 "contain"=>
-					array("Matched.firstname",
-						  "Matched.lastname",
-						  "Matched.country_id",
-						  "Matched.city",
-						  "Matched.gender_id",
-						  "Matched.state",
-						  "MatchStatus.value",
-						  "Matched.id")));	
+		
+		if ($type==4){
+			$matches = $this->find("all", array("conditions"=>array("Match.member_id"=>$member_id, "Match.match_status_id IN (1,2)","MATCH(Matched.lastname,Matched.firstname)  
+			          AGAINST('$query*' IN BOOLEAN MODE)"),
+				 "order"=>"Match.created DESC",
+				 "recursive"=>1,
+				 "contain"=>
+						array("Matched.firstname",
+							  "Matched.lastname",
+							  "Matched.country_id",
+							  "Matched.city",
+							  "Matched.gender_id",
+							  "Matched.state",
+							  "MatchStatus.value",
+							  "Matched.id")));
+		}else{
+			$matches = $this->find("all", array("conditions"=>array("Match.member_id"=>$member_id, "Match.match_status_id"=>$type,"MATCH(Matched.lastname,Matched.firstname)  
+			          AGAINST('$query*' IN BOOLEAN MODE)"),
+				 "order"=>"Match.created DESC",
+				 "recursive"=>1,
+				 "contain"=>
+						array("Matched.firstname",
+							  "Matched.lastname",
+							  "Matched.country_id",
+							  "Matched.city",
+							  "Matched.gender_id",
+							  "Matched.state",
+							  "MatchStatus.value",
+							  "Matched.id")));		
+		}
 		return $matches;
 		
 	}

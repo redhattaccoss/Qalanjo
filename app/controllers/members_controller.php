@@ -13,22 +13,40 @@ class MembersController extends AppController {
 		$this->helpers [] = "Recaptcha";
 	}
 	
+	private function _performStepCheck($number){
+		$member = $this->Session->read("Member.id");
+		$member = $this->Member->find("first", array("conditions"=>array("Member.id"=>$member), "recursive"=>-1));
+		$complete = $member["Member"]["progress"];
+		if ($complete=="complete"){
+			$this->redirect("/welcome");		
+		}
+		if ($complete=="members/step"){
+			$progress = 1;
+		}else{	
+			$progress = substr($complete, 13, 1);
+		}
+		if ($progress!=$number){
+			$this->redirect("/members/step/".$progress);
+		}
+	}
+	
 	/**
 	 * Action for 3 step rules ...
 	 * @param int $number Specifies the number
 	 */
 	function step($number = 1) {
-		if (!empty($this->data)) {
+		//$this->_performStepCheck($number);
+		if (! empty ( $this->data )) {
 			if ($number == 1) {
 				$fields [] = "country_id";
 				$fields [] = "zipcode";
-				if (isset($this->data["Member"]["state"] ) && ($this->data ["Member"] ["state"] != "")&&($this->data["Member"]["country_id"]==236)) {
+				if (isset ( $this->data ["Member"] ["state"] ) && ($this->data ["Member"] ["state"] != "") && ($this->data ["Member"] ["country_id"] == 236)) {
 					$fields [] = "state";
 					$this->loadModel ( "State" );
 					$state = $this->State->find ( "first", array ("conditions" => array ("State.id" => $this->data ["Member"] ["state"] ) ) );
 					$this->data ["Member"] ["state"] = $state ["State"] ["name"];
-				}else{
-					unset($this->data["Member"]["state"]);
+				} else {
+					unset ( $this->data ["Member"] ["state"] );
 				}
 			} else if ($number == 2) {
 				$fields [] = "passionate_about";
@@ -36,15 +54,15 @@ class MembersController extends AppController {
 			}
 			if ($this->Member->edit ( $this->data, $fields )) {
 				if ($this->Member->MemberProfile->save ( $this->data, $fields )) {
-					$this->Member->save_progress($this->Session->read("Member.id"), "members/step/" . ($number + 1));
-					$this->redirect ("/members/step/".($number + 1));
+					$this->Member->save_progress ( $this->Session->read ( "Member.id" ), "members/step/" . ($number + 1) );
+					$this->redirect ( "/members/step/" . ($number + 1) );
 				}
 			}
 		}
-		if ($number==3){
-			if ($this->Session->check("call")){
-				$this->set("call", true);
-				$this->Session->write("call", null);
+		if ($number == 3) {
+			if ($this->Session->check ( "call" )) {
+				$this->set ( "call", true );
+				$this->Session->write ( "call", null );
 			}
 		}
 		
@@ -66,16 +84,24 @@ class MembersController extends AppController {
 		$this->set ( "states", $states );
 		$this->render ( "/elements/blue/members/index/step_" . $number, "blue_full_block" );
 	}
+	/**
+	 * (non-PHPdoc)
+	 * @see AppController::beforeFilter()
+	 */
 	function beforeFilter() {
 		parent::beforeFilter ();
 		$this->Recaptcha->publickey = "6Lfd7sISAAAAAIiAynM871fy2Qxejpt3_srDY_IB";
 		$this->Recaptcha->privatekey = "6Lfd7sISAAAAAImtgP0ywAko7RX3tvbD7JwoN-rw";
-		if ($this->action=="login"){
-			$this->handleLogin();
-		}	
+		if ($this->action == "login") {
+			$this->handleLogin ();
+		}
+		
 	}
 	
-	function handleLogin(){
+	/**
+	 * Handles for login ...
+	 */
+	function handleLogin() {
 		$this->layout = "blue_full_block_no_tab";
 	}
 	
@@ -85,41 +111,40 @@ class MembersController extends AppController {
 	 */
 	function signup() {
 		$this->layout = "home_page";
-		
-		
-		if (!empty($this->data)) {
-			
-			$password = $this->data["Member"]["confirm_password"];
-			
-			if ($this->data['Member']['password'] == $this->Auth->password($this->data['Member']['confirm_password'])) {
-				$validates = $this->Member->signup($this->data);
-				if ($validates){
+		if (! empty ( $this->data )) { //if post
+			$password = $this->data ["Member"] ["confirm_password"];
+			if ($this->data ['Member'] ['password'] == $this->Auth->password ( $this->data ['Member'] ['confirm_password'] )) {
+				$validates = $this->Member->signup ( $this->data );
+				if ($validates) {
 					$id = $this->Member->getLastInsertId ();
 					$album ["Album"] ["name"] = "default";
 					$album ["Album"] ["member_id"] = $id;
 					if ($this->Member->Album->createDefault ( $album )) {
 						$this->Session->write ( "Member.id", $id );
-						$this->Session->write("Member.logged", 1);
+						$this->Session->write ( "Member.logged", 1 );
 						$this->Session->write ( "process", "signup" );
 						$this->email_activation ( $password );
-						
-					}
-					if ($this->Auth->login($this->data)){	
-						$this->Auth->allow("*");
-						$this->Member->save_progress ( $id, "members/step");
-						$this->redirect($this->Auth->redirect());	
-					}
 					
-				}else{
-					debug($this->Member->invalidFields());
+					}
+					if ($this->Auth->login ( $this->data )) { //force login
+						$this->Auth->allow ( "*" );
+						$this->Member->save_progress ( $id, "members/step" );
+						$this->redirect ("/members/step");
+					}
+				
+				} else {
+					debug ( $this->Member->invalidFields () );
 				}
 			}
-			
+		
 		}
 		$this->loadHomeContent ();
 	}
 	
-	function loadHomeContent() {
+	/**
+	 * Load Home related contents ...
+	 */
+	private function loadHomeContent() {
 		$option = array ("fields" => array ("id", "value" ) );
 		$this->loadModel ( "Gender" );
 		$this->loadModel ( "Country" );
@@ -146,59 +171,37 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 * 
-	 * Controller action for logging in ...
+	 * Action for login ...
 	 */
-	/*
 	function login() {
-		$this->layout = "home_page";
 		if (! empty ( $this->data )) {
-			$this->Member->set ( $this->data );
-			if ($this->Member->validates ( array ('fieldList' => array ('username', 'password' ) ) )) {
-				$member = $this->Member->login ();
-				if ($member) {
-						$this->plugValues($member);
-						
-						if ($member ["Member"] ["progress"] == "complete") {
-							$this->redirect ("/");
-						}else{
-							$this->redirect("/".$member["Member"]["progress"]);
-						}
-				
-				} else {
-					$this->Session->setFlash ( "The username you entered does not belong to any account." );
-				}
+			if ($this->Auth->login ( $this->data )) { //force login
+				$this->Auth->allow ( "*" );
+				$this->redirect ( $this->Auth->redirect () );
+			} else {
+				$this->set ( "error", "true" );
 			}
 		}
-		$this->loadHomeContent ();
-		$this->set ( "function", "login" );
 	}
-	*/
 	
-	function login(){
-		if (!empty($this->data)){
-			if ($this->Auth->login($this->data)){
-				$this->Auth->allow("*");
-				$this->redirect($this->Auth->redirect());
-			}else{
-				$this->set("error", "true");
-			}
-		}
-	}
-	function logout(){
+	/**
+	 * Action for logout
+	 */
+	function logout() {
 		$member_id = $this->Session->read ( "Member.id" );
 		$this->Member->updateOnline ( $member_id, false );
-		$this->Session->destroy();
-		$this->redirect("/");
+		$this->Session->destroy ();
+		$this->redirect ( "/" );
 	}
+	
 	/**
 	 * Plug values for member ...
-	 * @param $member
+	 * @param $member The member
 	 */
-	private function plugValues($member){
+	private function plugValues($member) {
 		$this->Session->write ( 'Member.id', $member ['Member'] ['id'] );
 		$this->Session->write ( "Member.logged", true );
-		$this->Cookie->write("Member.id", $member["Member"]["id"], true, "1 hour");
+		$this->Cookie->write ( "Member.id", $member ["Member"] ["id"], true, "1 hour" );
 		$this->Session->write ( "userid", $member ['Member'] ['id'] );
 		$this->Member->updateOnline ( $member ['Member'] ['id'], true );
 	}
@@ -206,54 +209,21 @@ class MembersController extends AppController {
 	/**
 	 * Decides what path to be chosen afterwards ...
 	 */
-	function decidePath(){
-		$progress = $this->Session->read("Auth.Member.progress");
-		$member = $this->Member->find("first", array("conditions"=>array("Member.id"=>$this->Session->read("Auth.Member.id")), "recursive"=>-1));
-		$this->plugValues($member);
-		if ($progress=="complete"){
-			$this->redirect("/welcome");
-		}else if ($progress=="step_complete"){
-			$this->Session->write("call", true);
-			$this->redirect("/members/step/3");
-		}else{
-			$this->redirect("/".$member["Member"]["progress"]);
+	function decidePath() {
+		$progress = $this->Session->read ( "Auth.Member.progress" );
+		$member = $this->Member->find ( "first", array ("conditions" => array ("Member.id" => $this->Session->read ( "Auth.Member.id" ) ), "recursive" => - 1 ) );
+		$this->plugValues ( $member );
+		if ($progress == "complete") {
+			$this->redirect ( "/welcome" );
+		} else if ($progress == "step_complete") {
+			$this->Session->write ( "call", true );
+			$this->redirect ( "/members/step/3" );
+		} else {
+			$this->redirect ( "/" . $member ["Member"] ["progress"] );
 		}
 	}
 	
 	/**
-	 * Ajax version of login ...
-	 */
-	function ajax_login(){
-		if ($this->RequestHandler->isAjax()){
-			if (!empty($this->data)){
-				$this->data = Sanitize::clean($this->data);
-				$this->Member->set($this->data);
-				$member = $this->Member->login();
-				if (!empty($member)){
-					$this->plugValues($member);
-					$temp["result"] = "true";
-					$this->set("response", json_encode($temp));
-				}else{
-					$temp["result"] = "false";
-					$temp["errors"] = "The user does not exist";
-					$this->set("response", json_encode($temp));
-				}
-			}
-			
-		}
-	}
-	
-	/*
-	function logout() {
-		$member_id = $this->Session->read ( "Member.id" );
-		$this->Member->updateOnline ( $member_id, false );
-		$this->Session->destroy ();
-		$this->redirect ( "http://" . $_SERVER ['SERVER_NAME'] . $this->base . "/" );
-	}
-	*/
-	
-	/**
-	 * 
 	 * activate members, either via link-click if $id and $code are not empty, or via manual insertion in the activation page
 	 * @param int $id
 	 * @param string $code
@@ -273,7 +243,7 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 * Enter description here ...
+	 * Link for activation ...
 	 * @param $id
 	 * @param $code
 	 */
@@ -288,41 +258,44 @@ class MembersController extends AppController {
 		}
 	}
 	
-	function reset($code){
-		$id = $this->Member->reset($code);
-		if (!$id){
-			$this->redirect("/");
-		}else{
-			$this->redirect("/members/changepassword");
+	/**
+	 * Reset code for changing password ...
+	 * @param $code token to be compared 
+	 */
+	function reset($code) {
+		$id = $this->Member->reset ( $code );
+		if (! $id) {
+			$this->redirect ( "/" );
+		} else {
+			$this->redirect ( "/members/changepassword" );
 		}
 	}
 	
 	/**
 	 * Change for password ...
 	 */
-	function changepassword(){
+	function changepassword() {
 		$this->layout = "blue_full_block";
-		if (!empty($this->data)){
-			$validates = $this->Member->validates(array("fieldList"=>array("password", "confirm_password")));
-			if ($validates){
-				if ($this->Member->save($this->data, false)){
-					if ($this->RequestHandler->isAjax()){
-						$temp["status"] = "success";
-					}else{
-						$this->redirect(array("action"=>"change_password_success"));
+		if (! empty ( $this->data )) {
+			$validates = $this->Member->validates ( array ("fieldList" => array ("password", "confirm_password" ) ) );
+			if ($validates) {
+				if ($this->Member->save ( $this->data, false )) {
+					if ($this->RequestHandler->isAjax ()) {
+						$temp ["status"] = "success";
+					} else {
+						$this->redirect ( array ("action" => "change_password_success" ) );
 					}
-				}else{
-					if ($this->RequestHandler->isAjax()){
-						$temp["status"] = "failed";
-						$temp["errors"] = $this->Member->invalidFields();
-					}else{
-						$this->set("errors", $this->Member->invalidFields());
+				} else {
+					if ($this->RequestHandler->isAjax ()) {
+						$temp ["status"] = "failed";
+						$temp ["errors"] = $this->Member->invalidFields ();
+					} else {
+						$this->set ( "errors", $this->Member->invalidFields () );
 					}
 				}
 			}
 		}
-		
-		
+	
 	}
 	
 	/**
@@ -339,9 +312,8 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 * 
-	 * checks the $page variable to know what page to render
-	 * @param int $page
+	 * Profile completion part.
+	 * @param int $page the $page variable to know what page to render
 	 */
 	
 	function profile_completion($page = 1) {
@@ -354,7 +326,7 @@ class MembersController extends AppController {
 			$id = $this->Session->read ( "Member.id" );
 		}
 		if (! empty ( $this->data )) {
-
+			
 			if (isset ( $this->data ["MemberProfileAttributeWeight"] ["educational_level_id"] ) && ($this->data ["MemberProfileAttributeWeight"] ["educational_level_id"] == "")) {
 				$this->set ( "error", true );
 			} else {
@@ -370,8 +342,8 @@ class MembersController extends AppController {
 		if ($page == 5) {
 			$this->redirect ( "/questionnaire" );
 		}
-		$this->loadProfileQuestion($page);
-		if ($page==3){
+		$this->loadProfileQuestion ( $page );
+		if ($page == 3) {
 			$educationalLevel = $this->Member->MemberProfileAttributeWeight->EducationalLevel->find ( 'all', array ("recursive" => - 1 ) );
 			$this->set ( 'educationalLevels', $educationalLevel );
 			$income = $this->Member->MemberProfileAttributeWeight->PersonalIncome->find ( 'all', array ("recursive" => - 1 ) );
@@ -379,28 +351,27 @@ class MembersController extends AppController {
 			$statuses = $this->Member->MemberProfile->MaritalStatus->find ( 'all', array ("recursive" => - 1 ) );
 			$this->set ( 'statuses', $statuses );
 		}
-		if ($page==1){
+		if ($page == 1) {
 			$pageSet = "My Appearance";
-			$perc = 0;	
-		}else if ($page==2){
+			$perc = 0;
+		} else if ($page == 2) {
 			$pageSet = "My Lifestyle";
-			$perc = 8;	
-		}else if ($page==3){
+			$perc = 8;
+		} else if ($page == 3) {
 			$pageSet = "My Personal Background";
-			$perc = 15;	
-		}else if ($page==4){
-			$pageSet = "Express Yourself";	
+			$perc = 15;
+		} else if ($page == 4) {
+			$pageSet = "Express Yourself";
 			$perc = 23;
 		}
-		$this->set("pageSet", $pageSet);
-		$this->set("perc", $perc);
-		$this->set("progressSet", "Profile Building ".$page." out of 4");
+		$this->set ( "pageSet", $pageSet );
+		$this->set ( "perc", $perc );
+		$this->set ( "progressSet", "Profile Building " . $page . " out of 4" );
 		$this->set ( 'member_id', $id );
 		$this->set ( "set", "Profile Building" );
 		$this->set ( 'page', $page );
-		$this->render("/elements/blue/profile_building/page".$page);		
+		$this->render ( "/elements/blue/profile_building/page" . $page );
 	}
-	
 	
 	/**
 	 * load profile question for a specific page ...
@@ -410,7 +381,6 @@ class MembersController extends AppController {
 		$questions = $this->ProfileQuestion->find ( "all", array ("conditions" => array ("ProfileQuestion.page" => $page ) ) );
 		$this->set ( "questions", $questions );
 	}
-	
 	
 	/**
 	 * 
@@ -433,6 +403,9 @@ class MembersController extends AppController {
 		}
 	}
 	
+	/**
+	 * Check if selected item is valid ...
+	 */
 	function selected_valid() {
 		if (isset ( $this->data ["MemberProfileAnswer"] )) {
 			foreach ( $this->data ["MemberProfileAnswer"] as $answer ) {
@@ -448,8 +421,7 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 * 
-	 * Save answers ...
+	 * Save for answers ...
 	 */
 	function save_answers() {
 		$i = 0;
@@ -473,7 +445,7 @@ class MembersController extends AppController {
 					$data ["MemberProfileAnswer"] ["member_id"] = $this->data ["Member"] ["id"];
 					$this->Member->MemberProfileAnswer->save_answer ( $data );
 				}
-				$i++;
+				$i ++;
 			}
 		}
 	}
@@ -494,10 +466,10 @@ class MembersController extends AppController {
 			}
 			$this->load_index ( "all" );
 			$this->set ( "process", "home" );
-			$member = $this->Member->find("first", array("conditions"=>array("Member.id"=>$this->Session->read("Member.id")), "recursive"=>-1));
-			if (($member["Member"]["progress"]=="complete")||($member["Member"]["progress"]=="step_complete")){
-				$this->loadMatchesAtHomePage();
-			}else{
+			$member = $this->Member->find ( "first", array ("conditions" => array ("Member.id" => $this->Session->read ( "Member.id" ) ), "recursive" => - 1 ) );
+			if (($member ["Member"] ["progress"] == "complete") || ($member ["Member"] ["progress"] == "step_complete")) {
+				$this->loadMatchesAtHomePage ();
+			} else {
 				//$this->redirect("/".$member["Member"]["progress"]);
 			}
 		} else {
@@ -505,7 +477,10 @@ class MembersController extends AppController {
 		}
 	}
 	
-	private function loadMatchesAtHomePage(){
+	/**
+	 * Load matches at home page ...
+	 */
+	private function loadMatchesAtHomePage() {
 		$this->loadMatches ();
 		$matches = $this->Match->getRandomMatch ( $this->Session->read ( "Member.id" ), "all" );
 		$loadMatches = array ();
@@ -530,20 +505,6 @@ class MembersController extends AppController {
 		}
 	}
 	
-	function load_notification() {
-		$this->layout = "ajax";
-		$member_id = $this->Session->read ( "Member.id" );
-		$this->process_load_notification ( $member_id );
-	}
-	
-	function notification_delete($id) {
-		if ($this->Member->Notification->delete ( $id )) {
-			$this->load_notification ();
-			$this->render ( "load_notification", "ajax" );
-		}
-	
-	}
-	
 	/**
 	 * 
 	 * Load your matches ...
@@ -556,11 +517,9 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 *
 	 * Controller for viewing the profile ...
 	 * @param $key it could be the username or the userid.
 	 */
-	
 	function profile($key = "") {
 		if ($key == "") {
 			$this->redirect ( array ("action" => "index" ) );
@@ -663,18 +622,8 @@ class MembersController extends AppController {
 		$this->index ( true );
 		$this->render ( "index", "ajax" );
 	}
-	
 	/**
-	 * 
-	function autoComplete() {
-		Configure::write ( 'debug', 0 );
-		$this->layout = 'ajax';
-		$query = $_GET["term"];
-		$query = Sanitize::escape($query);
-		$members = $this->Member->autocomplete($query);
-		$this->set ( "members", $members );
-	}
-	 * Auto complete ...
+	 * Auto complete function ...
 	 */
 	function autocomplete() {
 		if ($this->RequestHandler->isAjax ()) {
@@ -689,6 +638,9 @@ class MembersController extends AppController {
 		}
 	}
 	
+	/**
+	 * Autocomplete for member ...
+	 */
 	function autocomplete_member() {
 		if ($this->RequestHandler->isAjax ()) {
 			Configure::write ( 'debug', 0 );
@@ -704,8 +656,8 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 * 
-	 * Edit ...
+	 * Controller for edit action ...
+	 * @param $layout The layout
 	 */
 	function edit($layout = "blue_full_block") {
 		$this->layout = $layout;
@@ -774,7 +726,6 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 * 
 	 * Load Interests based on passed key ...
 	 * @param $sk The key
 	 */
@@ -792,7 +743,6 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 * 
 	 * Load Profile Words ...
 	 */
 	private function loadProfileWords() {
@@ -835,7 +785,6 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 * 
 	 * Process edit interests ...
 	 */
 	private function processEditInterest() {
@@ -913,6 +862,10 @@ class MembersController extends AppController {
 		}
 	}
 	
+	/**
+	 * Action for email activation ...
+	 * @param $password The password associated with the signup
+	 */
 	function email_activation($password = "") {
 		if (($password != "") && ($this->Session->check ( "Member.id" ))) {
 			$member_id = $this->Session->read ( "Member.id" );
@@ -930,18 +883,6 @@ class MembersController extends AppController {
 		} else {
 			$this->redirect ( "/login" );
 		}
-	}
-	function signup_congrats() {
-		$member_id = $this->Session->read ( "Member.id" );
-		$role_id = $this->Member->getRole ( $member_id );
-		if ($role_id == 1) {
-			$this->Member->updateRole ( 3, $member_id );
-		}
-		$this->Session->write ( "userid", $member_id );
-		$this->layout = "personal_assessment";
-		$this->set ( "step", "Congratulations" );
-		$this->set ( "set", "Congratulations" );
-		$this->set ( "progress", 100 );
 	}
 	
 	function viewer() {
@@ -1100,6 +1041,9 @@ class MembersController extends AppController {
 		$this->set ( compact ( "countries", "genders", "states", "distances", "user" ) );
 	}
 	
+	/**
+	 * Enter description here ...
+	 */
 	function update() {
 		$this->layout = "ajax";
 		if (! empty ( $this->data )) {
@@ -1125,6 +1069,10 @@ class MembersController extends AppController {
 		$this->layout = "full_block";
 	}
 	
+	/**
+	 * Controller for account ...
+	 * @param $type
+	 */
 	function account($type = "general") {
 		if (! empty ( $this->data )) {
 			if ($type == "general") {
@@ -1483,8 +1431,6 @@ class MembersController extends AppController {
 		$this->layout = "blue_full_block_no_tab";
 	}
 	
-	
-	
 	/**
 	 * Resets for the email of a user ...
 	 */
@@ -1603,6 +1549,10 @@ class MembersController extends AppController {
 		}
 	}
 	
+	/**
+	 * Send connection to a view member ...
+	 * @param $view_member_id The viewed member
+	 */
 	function send_connection($view_member_id) {
 		if ($this->RequestHandler->isAjax ()) {
 			$view_member_id = Sanitize::escape ( $view_member_id );
@@ -1651,45 +1601,58 @@ class MembersController extends AppController {
 		}
 	}
 	
-	
 	/**
 	 * Action for Questionnaire Success ...
 	 */
-	function questionnaire_success(){
+	function questionnaire_success() {
 		$this->layout = "personal_assessment";
-		$this->set("progressSet", "");
-		$this->set("pageSet", "Success");
-		$this->set("perc", 100);
-		$this->loadModel("Match");
+		$this->set ( "progressSet", "" );
+		$this->set ( "pageSet", "Success" );
+		$this->set ( "perc", 100 );
+		$member_id = $this->Session->read ( "Member.id" );
+		$this->Member->save_progress ( $member_id, "complete" );
+		$this->loadModel ( "Match" );
 		$this->loadMatches ();
-		$count = count($this->Match->getMatches($this->Session->read("Member.id")));
-		$this->set("count", $count);
+		$count = count ( $this->Match->getMatches ( $this->Session->read ( "Member.id" ) ) );
+		$this->set ( "count", $count );
 	}
 	
-	
-	function getMemberDetailsForMessage($memberId){
-			$member = $this->Member->find("first",
-						 array("conditions"=>array("Member.id"=>$memberId),
-						 		 "recursive"=>1,
-						 		  "fields"=>array("Member.id", "Member.lastname", "Member.gender_id", "Member.firstname", "Member.address1", "Member.state"),
-						 		 "contain"=>array("MemberProfile.picture_path", "Country.name")
-						 	));
-						 	
-			if ($member){
-				$member["Member"]["age"] = $this->Member->MemberProfile->getAgeV2($memberId);
-				$profile = $this->Member->MemberProfile->find("first", array("conditions"=>array("MemberProfile.member_id"=>$member["Member"]["id"]), "recursive"=>-1));	
-				if ($profile){
-					$member["Member"]["picturePath"] = $profile["MemberProfile"]["picture_path"];
-				}else{
-					$member["Member"]["picturePath"] = "";
-				}
-				$this->set("response", json_encode($member));
-			}else{
-				$this->set("response", "false");
+	/**
+	 * Get Member Details for Message ...
+	 * @param $memberId The member
+	 */
+	function getMemberDetailsForMessage($memberId) {
+		$member = $this->Member->find ( "first", array ("conditions" => array ("Member.id" => $memberId ), "recursive" => 1, "fields" => array ("Member.id", "Member.lastname", "Member.gender_id", "Member.firstname", "Member.address1", "Member.state" ), "contain" => array ("MemberProfile.picture_path", "Country.name" ) ) );
+		if ($member) {
+			$member ["Member"] ["age"] = $this->Member->MemberProfile->getAgeV2 ( $memberId );
+			$profile = $this->Member->MemberProfile->find ( "first", array ("conditions" => array ("MemberProfile.member_id" => $member ["Member"] ["id"] ), "recursive" => - 1 ) );
+			if ($profile) {
+				$member ["Member"] ["picturePath"] = $profile ["MemberProfile"] ["picture_path"];
+			} else {
+				$member ["Member"] ["picturePath"] = "";
 			}
-			$this->render ("/elements/response", "ajax" );
+			$this->set ( "response", json_encode ( $member ) );
+		} else {
+			$this->set ( "response", "false" );
+		}
+		$this->render ( "/elements/response", "ajax" );
+	}
+	
+	function count_inbox_photos(){
+			$member_id = $this->Session->read("Member.id");
+			$this->loadModel("Album");
+			$this->loadModel("ReceiveMessage");
+			$count = 0;
+			$albums = $this->Album->find("all", array("conditions"=>array("Photo.member_id"=>$member_id)));
+			foreach($albums as $album){
+				$count+=$this->Album->countPhotos($member_id);
+			}
+			$response["photoCount"] = $count;
+			$response["inboxCount"] = $this->ReceiveMessage->find("count", array("conditions"=>array("ReceiveMessage.member_id"=>$member_id, "ReceiveMessage.message_status_id"=>2)));
+			$this->set("response", json_encode($response));
+			$this->render ( "/elements/response", "ajax" );
 		
 	}
-
+	
 }
 ?>

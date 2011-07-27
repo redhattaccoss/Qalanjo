@@ -7,12 +7,16 @@
 		<?php echo $html->css("blueprint/screen")?>
 		<?php echo $html->css(array("blueprint/print"), "stylesheet", array("media"=>"print"))?>
 		<!--[if IE]><?php echo $html->css("blueprint/ie")?><![endif]-->
-		<?php echo $html->css(array("redmond/jquery.ui.all", "blue/container-style", "toastmessage/css/jquery.toastmessage"))?>
+		<?php echo $html->css(array("redmond/jquery.ui.all", "blue/container-style", "toastmessage/css/jquery.toastmessage", "blue/footer-2"))?>
+		<?php 
+			echo $html->css(array("uploadify.css"), "stylesheet", array("inline"=>false));
+		?>
+		
 		<?php 
 			$path = $html->url("/");
 			echo $this->element("scripts/php_javascript", array("url"=>$path));
 		?>
-		<?php echo $javascript->link(array("jquery", "js/jquery-animate-clip", "js/jquery.easing.1.3", "ui/jquery-ui-1.8.10.custom",'validate/jquery.validate.min', "ui/autocomplete.html", "js/jquery.toastmessage.js", "js/jquery.form", "blue/members/session_checker"))?>
+		<?php echo $javascript->link(array("jquery", "js/jquery-animate-clip", "js/jquery.easing.1.3", "ui/jquery-ui-1.8.10.custom",'validate/jquery.validate.min', "ui/autocomplete.html", "js/jquery.form", "blue/members/session_checker"))?>
 		<?php 
 			if ($this->action=="match_settings"){
 				echo $html->css("blue/match-setting");
@@ -42,18 +46,13 @@
 		?>
 	</head>
     <body>
-
     	<div class="header-bg">
     	</div>
-    		<?php 
-		
-			echo $this->element("blue/general/comet");
-		
-			?>
 		<div class="container">
 			<div class="header left">
-				<div class="logo left"></div>
+				<?php echo $html->link(" ", "/welcome", array("class"=>"logo left"))?>
 				<div class="right-header left">
+					<?php if ($this->action!="inbox"){?>
 					<div class="controls-right right">
 						<div class="right">
 							<?php 
@@ -68,7 +67,7 @@
 									echo $html->image("uploads/".$member["Member"]["id"]."/default/profile_thumb_".$member["MemberProfile"]["picture_path"], array("url"=>"/members/profile/".$member["Member"]["id"], "class"=>"left profile-pic"));
 								}else{
 									if (isset($member["Gender"])){
-										if ($member["Gender"]["value"]=="Man"){
+										if ($member["Member"]["gender_id"]==1){
 											echo $html->image($path_index."thumb-s-men.jpg", array("url"=>"/members/profile/".$member["Member"]["id"], "class"=>"left profile-pic"));
 										}else{
 											echo $html->image($path_index."thumb-s-women.jpg", array("url"=>"/members/profile/".$member["Member"]["id"], "class"=>"left profile-pic"));
@@ -87,7 +86,16 @@
 						</div>
 					</div>
 					
-					<?php echo $this->element("blue/members/general/header")?>
+						<?php }else{
+						?>
+							<div class="spacer-top"></div>
+						<?php 
+						}?>
+						
+					<?php
+					if ($this->action!="step"){
+					echo $this->element("blue/members/general/header");
+					}?>
 					
 				</div>
 			</div>
@@ -98,19 +106,9 @@
 					echo $content_for_layout;
 				?>
 			</div>
-			<div class="footer left">
-				<div class="left footer-left">
-                        <div class="left">
-                           <h2 class='qalanjo'>Qalanjo LLC</h2>
-                           <div class="name-company">Copyright &copy; Qalanjo LLC. All Rights Reserved 2011</div>
- 	  	                   <div class="find-us"><span class="left">Find Us on</span><?php echo $html->link(" ", "http://www.facebook.com/pages/Qalanjo/183622908342331", array("class"=>"fb left clear"))?><?php echo $html->link(" ", "#", array("class"=>"twitter left"))?><?php echo $html->link(" ", "#", array("class"=>"rss left"))?></div>
-                        </div>
-                    </div>
-				 <?php echo $this->element("blue/general/footer_link_set_2")?>
-				
-			</div>
-			<div class="left gradient-bottom"></div>
+			<?php echo $this->element("blue/general/footer-new")?>
 		</div>
+		<div class="footershadow"></div>	
 		<div id="overlay" class="overlay"></div>
 		<?php if ($this->action=="step"){
 		 echo $this->element("blue/dialogs/questionnaire");

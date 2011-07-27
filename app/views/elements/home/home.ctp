@@ -82,7 +82,7 @@
                     </dt>
                     
                     <dd class="left">
-                    	<?php echo $form->input("password", array("id"=>"password","type"=>"password", "div"=>false, "label"=>false, "selected"=>""))?>
+                    	<?php echo $form->input("password", array("id"=>"password","type"=>"password", "div"=>false, "label"=>false, "selected"=>"", "value"=>""))?>
                        <span class="footnote">Must be atleast 5 characters</span>
                         <div class="required special">
                         </div>
@@ -94,7 +94,7 @@
                     </dt>
                     
                     <dd class="left">
-                    	<?php echo $form->input("confirm_password", array("id"=>"password","type"=>"password", "div"=>false, "label"=>false, "selected"=>""))?>
+                    	<?php echo $form->input("confirm_password", array("id"=>"password","type"=>"password", "div"=>false, "label"=>false, "selected"=>"", "value"=>""))?>
                         <label class="required">
                         </label>
                     </dd>

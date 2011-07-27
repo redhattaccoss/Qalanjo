@@ -87,7 +87,6 @@ if (!empty($messages)){
 	<?php echo $form->end()?>
 	</div>
 </div>
-
 <?php 
 }else{
 ?>
@@ -96,3 +95,4 @@ if (!empty($messages)){
 	</div>	
 <?php 
 }
+?>

@@ -1,0 +1,55 @@
+.main-container{
+	margin-left:24px;
+}
+
+.headerline{
+	width:408px;
+	min-height:4px;
+	margin: 0px auto 0 auto;
+	background-color:#005F9D;
+
+}
+.loginbox{
+	width:388px;
+	min-height:174px;
+	margin: 0px auto 0 auto;
+	background-color:#ffffff;
+	padding-top:20px;
+	padding-left: 20px;
+
+}
+.loginbox p{
+    font-size: 16px;
+    width: 73px;
+    margin: 18px 10px 10px 30px;
+    display: inline-block;
+}
+
+.txtlogin
+{
+
+padding: 0.5em;
+padding-top: 0.5em;
+padding-right: 0.5em;
+padding-bottom: 0.5em;
+padding-left: 0.5em;
+width: 200px;
+
+}
+.button-set
+{
+    margin: 10px 0px 0px 258px;
+}
+.button-set button{
+	background: url(../img/admin/admin-container/loginbutton.png) no-repeat;
+	height:38px;
+	width:74px;
+	border:none;
+	cursor:pointer;
+}
+.button-set button:hover{
+	background-position:0px -40px;
+}
+.button-set button:active{
+	background-position:0px -80px;
+}

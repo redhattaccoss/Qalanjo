@@ -26,7 +26,7 @@
     	<div class="header-bg"></div>
 		<div class="container">
 			<div class="header left">
-				<div class="logo left"></div>
+				<?php echo $html->link(" ", "/", array("class"=>"logo left"))?>
 				<div class="right-header left">
 					<?php if ($this->action!="login"){?>
 					<div class="controls-right right">

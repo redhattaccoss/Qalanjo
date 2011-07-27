@@ -122,13 +122,13 @@ class MatchesController extends AppController {
 	function search($type=1,$render = 1){	
 		$this->data = Sanitize::clean($this->data);
 		$member_id = $this->Session->read("Member.id");
+		debug($this->data);
 		$tempmatches = $this->Match->searchMatches($member_id, $this->data["Match"]["search"],$type);
 		$this->searchAndRender ( $render, $tempmatches);
 	}
 	function loadMatchesForSelect(){
 		$member_id = $this->Session->read("Member.id");
 		$tempmatches = $this->Match->getDailyMatches($member_id, 0, 20, 4);
-		debug($tempmatches);
 		$this->searchAndRender (2, $tempmatches);
 	}
 	
@@ -140,6 +140,7 @@ class MatchesController extends AppController {
 	private function searchAndRender($render, $tempmatches) {
 		$this->loadModel("Country");
 		$this->loadModel("MemberProfile");
+		$member_id = $this->Session->read("Member.id");
 		$matches = array();
 		foreach($tempmatches as $match){
 			$country = $this->Country->find("first", array("conditions"=>array("Country.id"=>$match["Matched"]["country_id"]), "recursive"=>-1));

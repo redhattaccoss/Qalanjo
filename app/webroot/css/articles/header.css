@@ -1,0 +1,80 @@
+body {
+	background-color: #009;
+	background-repeat: repeat;
+	background:url(../img/articles/header/repeat-bg_s1.png) repeat;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/**
+ * Overrides
+ */
+.container{
+	width:934px;
+	margin-top:18px;
+}
+.container-main{
+	width:914px;
+	overflow:visible;
+	min-height:600px;
+	position:relative;
+	margin-bottom:31px;
+	background-color:#fff;
+	box-shadow:0px 5px 10px #0D293B;
+}
+.shadow{
+	height:1118px;
+	width:10px;
+	display:block;
+	background:url(../img/articles/header/dropshadow.png) no-repeat transparent;
+}
+.shadow-last{
+	background-position:-9px 0;
+}
+
+.header{
+	background:url(../img/articles/header/header-bg.jpg) no-repeat;
+	width:914px;
+	height:113px;
+	display:block;
+}
+.header-divider{
+	height:6px;
+	width:914px;
+	background-color: #00609D;
+}
+.logo{
+	width:299px;
+	height:106px;
+	display:block;
+	background:url(../img/articles/header/qalanjo-logo.png) no-repeat;
+	margin:20px 0 0 0;
+}
+.couple-top{
+	background:url(../img/articles/header/couple-top.png) no-repeat;
+	width:208px;
+	height:102px;
+	margin:15px 0 0 0;
+}
+.communicate{
+	background:url(../img/articles/header/communicate.png) no-repeat;
+	width:396px;
+	height:95px;
+	margin-top:12px;
+	display:block;
+}
+.questionnaire-container{
+	width:100%;
+	min-height: 760px;
+	margin:20px 10px 0 10px;
+}
+.questionnaire-container .questionnaire-header{
+	width:867px;
+	height:16px;
+	margin:0;
+	background: url(../img/articles/header/container-questionnaire-repeat.jpg) repeat-x #fff;
+	padding:15px 7px 15px 16px;
+	border-left: 1px solid #c0c0c0;
+	border-right: 1px solid #c0c0c0;
+	
+}
+

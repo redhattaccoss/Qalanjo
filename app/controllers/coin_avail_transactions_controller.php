@@ -103,7 +103,9 @@ class CoinAvailTransactionsController extends AppController {
 		$this->Session->write("CoinAvailResult", null);
 		$qpoints = $this->Session->read("qpoints");
 		$this->Session->write("qpoints", null);
-		$this->set("qpoints", $qpoints);
+		$member_id = $this->Session->read("Member.id");
+		$member = $this->Member->find("first", array("conditions"=>array("Member.id"=>$member_id), "recursive"=>-1));
+		$this->set("qpoints", $member["Member"]["credit_points"]);
 	}
 	function review(){
 		$transaction = $this->CoinAvailTransaction->avail($this->data);
@@ -134,17 +136,25 @@ class CoinAvailTransactionsController extends AppController {
 			$paymentInfo["Payment"]["amount"] = $type["CoinPackage"]["amount"];
 			$paymentInfo["Payment"]["paymentType"] = "Sale";
 			$paymentInfo["Payment"]["currencyCode"] = "USD";
+			$this->loadModel("Member");
+			$member_id = $this->Session->read("Member.id");
+			$member = $this->Member->find("first", array("conditions"=>array("Member.id"=>$member_id)));
+			
 			$key = Security::generateAuthKey( );
 			$this->Session->write("Payment.transaction", $key);
 			$this->Session->write("Payment.cointype", $type);
+			$this->Session->write("Payment.beforeBalance", $member["Member"]["credit_points"]);
 			$paymentInfo["Payment"]["returnURL"] ="http://".$_SERVER['SERVER_NAME'] . $this->base."/qpoints/success_paypal/".$key;
 			$paymentInfo["Payment"]["cancelURL"] ="http://".$_SERVER['SERVER_NAME'] . $this->base."/qpoints/cancel_paypal/".$key;		
-			$this->PaypalService->callShortcutExpressCheckout($paymentInfo);
+			$res = $this->PaypalService->callShortcutExpressCheckout($paymentInfo);
 			if ($this->Session->check("TOKEN")){
 				$this->PaypalService->redirectToPaypal($this->Session->read("TOKEN"));
+			}else{
+				debug($res);
+				
 			}
 		}else{
-			$this->redirect("/subscribe");
+			$this->redirect("/qpoints/buy");
 		}
 	}
 	
@@ -152,12 +162,12 @@ class CoinAvailTransactionsController extends AppController {
 		if ($this->Session->check("TOKEN")){
 			$this->PaypalService->getShippingDetails($this->Session->read("TOKEN"));
 			if ($this->Session->check("Payment.payerId")){
-				$res = $this->PaypalService->confirmPayment($this->Session->read("Payment.amount"));
+				$result = $this->PaypalService->confirmPayment($this->Session->read("Payment.amount"));
 				if ($result["ACK"]=="Success"){
 					$this->data["CoinAvailTransaction"]["payment_method_id"] = 2;
 					$this->data["CoinAvailTransaction"]["transaction_code"] = "";
 					$this->data["CoinAvailTransaction"]["member_id"] = $this->Session->read("Member.id");
-					$type = $this->Session->read("cointype");
+					$type = $this->Session->read("Payment.cointype");
 					$this->data["CoinAvailTransaction"]["amount"] = $type["CoinPackage"]["amount"];
 					$this->data["CoinAvailTransaction"]["coins"] = $type["CoinPackage"]["coins"];
 					$this->Session->write("transaction", null);

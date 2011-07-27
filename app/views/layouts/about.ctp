@@ -22,7 +22,7 @@
             </div>
             <div class="container-main left">
                	<div class="header left">
-               		<div class="logo left"></div>
+               		<?php echo $html->link(" ", "/", array("class"=>"logo left"))?>
                		<div class="couple-top left"></div>
                		<div class="right icon-set-button">
                			<?php 
@@ -32,7 +32,7 @@
                			?>
                			<?php echo $html->link(" ", "/", array("class"=>"find-my-match right clear"))?>
                		</div>
-               	</div>
+               	</div>d
                	<?php 
                		echo $this->element("blue/general/about_us_header");
                	?>

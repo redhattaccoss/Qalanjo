@@ -73,18 +73,24 @@
 
 <?php 
 	echo $html->scriptBlock("
+		var sending = false;
 		$(\"#replybox_{$message["PrivateMessage"]["id"]}\").TextAreaExpander().live(\"keypress\", function(e){
 			var self = $(this);
 			if ($(\"#check_{$message["PrivateMessage"]["id"]}\").is(':checked')){
 				if (e.which == 13) {
 					if ($.trim(self.html())!=\"\"){
-						$.post(qalanjo_url+\"private_message_replies/writeMessage\", $(\"#reply_form_{$message["PrivateMessage"]["id"]}\").serialize(), function(data){
+						if (!sending){
+							sending = true;
+							$.post(qalanjo_url+\"private_message_replies/writeMessage\", $(\"#reply_form_{$message["PrivateMessage"]["id"]}\").serialize(), function(data){
+									sending = false;
 									self.val(\"\");
 									$(data).appendTo(\"#replies_{$message["PrivateMessage"]["id"]}\").hide().fadeIn();
 								});
+						}
 					}else{
 						alert(\"Please enter a message\");
 					}
+				
 					e.preventDefault();	
 				}
 			}
@@ -104,8 +110,3 @@
 	");
 
 ?>
-<script type="text/javascript">
-<![CDATA[
-
-]]>
-</script>

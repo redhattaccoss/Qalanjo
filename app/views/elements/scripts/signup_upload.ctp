@@ -18,18 +18,23 @@ $(document).ready(function(){
 			'cancelImg':'<?php echo $html->url("/js/uploader/cancel.png")?>',
 			'onComplete'  : function(event, ID, fileObj, response, data) {
 				$.get('<?php echo $html->url("/member_profiles/process_signup_upload/")?>'+response, function(data){
-					var result = $.parseJSON(data);
-					if (result.result=="success"){
-						showDialog();
+					if (call==-1){
+						alert("Upload complete!");
+						window.location.href=qalanjo_url+"members/account";
+					}else{
+						var result = $.parseJSON(data);
+						if (result.result=="success"){
+							showDialog();
+						}
 					}
 				});
 			},
 		 	'fileExt'     : '*.jpg;*.gif;*.png',
 		 	'fileDesc'    : 'Image Files'
 		});
-		
+		if (call!=-1){
 		configureDialog();
-
+		}
 		if (call==1){
 			showDialog();
 		}

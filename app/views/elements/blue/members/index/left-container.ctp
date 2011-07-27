@@ -55,7 +55,7 @@
 				<li class="left clear">
 					<span class="count left">
 					<?php 
-						echo $html->link("<span id=\"photos-count\">(0)</span> Photos", "/photos", array("id"=>"photos-count", "escape"=>false));
+						echo $html->link("<span id='photos-count'>(0)</span>Photos", "/photos", array("escape"=>false));
 					?>
 					</span>  <span class="left upload">
 						<?php 

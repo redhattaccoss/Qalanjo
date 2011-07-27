@@ -1,0 +1,115 @@
+body {
+	background-color: #009;
+	background-repeat: repeat;
+	background: #CCCCCC;
+}
+.header-bg {
+	width: 100%;
+	height: 182px;
+	overflow: hidden;
+	background:url(../img/admin/admin-container/admin-header.jpg) repeat-x #CCCCCC;
+}
+
+.header{
+	width:100%;
+}
+.header .user{
+	margin-top:76px;
+}
+.header .admin-panel-name{
+	margin-top:14px;
+}
+.header .admin-panel-name h1{
+	color:#999;
+	font-size:26px;
+	margin:0;	
+}
+.header .admin-highlight{
+	color:#005F9D;
+}
+.welcome{
+	line-height:1em;
+	text-align: right;
+	font-size:14px;
+	color:#666666;
+}
+.welcome .name{
+	color:#005F9D;
+}
+.welcome span.date{
+	font-size:12px;
+	color:#999;
+}
+.container{
+	margin-top:-182px;
+	width:950px;
+	margin-bottom:24px;
+}
+.menus{
+	margin-top:14px;
+}
+.main-menu{
+	list-style-type: none;
+	padding:0;
+	margin:0;
+}
+.main-menu li{
+	float:left;
+	font-size:18px;
+	margin-right:26px;
+}
+.main-menu li a{
+	color:#666666;
+	text-decoration:none;
+}
+.main-menu li.last{
+	margin:0;
+}
+.logo{
+	margin:23px 12px 0 0;
+	background:url(../img/admin/admin-container/logo.png) no-repeat transparent;
+	height:106px;
+	width:299px;
+}
+
+.tab-line{
+	height:8px;
+	width:100%;
+	display:block;
+	overflow:hidden;
+	margin-top:-14px;
+	background-color:#00609D;
+}
+
+.homebox{
+	width:414px;
+	min-height:284px;
+	margin: 90px auto 0 auto;
+	background-color:#EFEFEF;
+	background-position: 2px 2px;
+	border-radius: 10px;
+	border:2px solid #999;
+}
+.titlehome{
+	margin: 12px;
+	font-size: 18px;
+	font-weight: bold;
+}
+.forgothomep{
+	margin: 4px 0 4 12px;
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.forgothomep{
+	margin: 12px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #005F9D;
+	cursor: pointer;
+}
+.gradient-bottom{
+	background:url(../img/container/gradient-gray-bottom_s1.png) repeat-x transparent;
+	height:21px;
+	width:100%;
+}

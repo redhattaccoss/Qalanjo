@@ -326,7 +326,12 @@ $(document).ready(function(){
 		});
 		e.preventDefault();
 	});
-	
+	$.get(qalanjo_url+"members/count_inbox_photos", function(data){
+		var counts = $.parseJSON(data);
+		$("#inbox-count").text("("+counts.photoCount+")");
+		$("#photos-count").text("("+counts.inboxCount+")");
+		
+	});
 	$("#composer").hide();
 	$(".match-messager").live("click",function(e){
 		var id = $(this).attr("id");
@@ -372,4 +377,6 @@ $(document).ready(function(){
 	
 		e.preventDefault();
 	});
+	
+	
 });

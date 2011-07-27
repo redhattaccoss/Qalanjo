@@ -1,10 +1,12 @@
 var currentId = 0;
+var currentItem = "";
 $(document).ready(function(){
 	interval = setInterval("updateStatus()", 1000, "javaScript");
 	$(".join a").click(function(e){
 		$("#viewport").animate({
 			marginLeft:"-840px"
 		}, 300, "linear");
+		currentItem = $(this).attr("href");
 		var id = $(this).attr("id").split("_");
 		currentId = id[1];
 		e.preventDefault();
@@ -16,7 +18,7 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	$(".paypal-pay").click(function(e){
-		window.location.href=qalanjo_url+"checkout_paypal/"+currentId;
+		window.location.href=currentItem;
 		e.preventDefault();
 	});
 	$(".cc-pay").click(function(e){

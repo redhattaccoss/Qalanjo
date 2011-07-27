@@ -213,3 +213,7 @@ label.required{
 .error_message, .flash-setting{
 	width:239px;
 }
+
+#file_uploadQueue{
+	text-align:center;
+}

@@ -3,9 +3,38 @@ if ($action=="render"){
 ?>
 	<div class="main-container left">
 		<div class="banner left">
-		<?php 
-			echo $html->image("/css/img/blue/inbox/love-guru.png");
-		?>
+			<div class="profile-container left">
+				<div class="profile-pic-inbox left">
+					<?php 
+						if (isset($member["MemberProfile"])&&($member["MemberProfile"]["picture_path"]!="")){
+							echo $html->image("uploads/".$member["Member"]["id"]."/default/profile_thumb_".$member["MemberProfile"]["picture_path"], array("url"=>"/members/profile/".$member["Member"]["id"], "class"=>"left profile-pic"));
+						}else{
+							if (isset($member["Gender"])){
+								if ($member["Member"]["gender_id"]==1){
+									echo $html->image($path_index."thumb-s-men.jpg", array("url"=>"/members/profile/".$member["Member"]["id"], "class"=>"left profile-pic"));
+								}else{
+									echo $html->image($path_index."thumb-s-women.jpg", array("url"=>"/members/profile/".$member["Member"]["id"], "class"=>"left profile-pic"));
+								}
+							}
+						}
+					?>
+				</div>
+				<div class="profile-set-inbox left">
+					<p>Hi,<span class="name">
+					<?php 
+						$fullname = $member["Member"]["firstname"]." ".$member["Member"]["lastname"];
+						echo $html->link($fullname, "/profile/".$member["Member"]["id"], array("class"=>"name"));
+					?></span>
+					</p>
+					<?php echo $html->link("Logout", "/members/logout", array("class"=>"logout"))?>
+					<br/><span class="date"><?php echo date("l, F d, Y h:m A")?></span>
+					
+				</div>
+			</div>
+			<div class="right container-search">
+				<input type="text" name="title-search" id="title" class="left search-text"/>
+				<button type="submit" class="search-button left"></button>
+			</div>
 		</div>
 		<div class="left-container left">
 			<div class="logo-q left"></div>

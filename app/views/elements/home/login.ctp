@@ -16,7 +16,7 @@
                     <dd class="left clear">
                         <?php 
 							echo $form->input("Member.password", array("div"=>false, "type"=>"password",
-												 "label"=>false, "class"=>"txt", "maxlength"=>50, "id"=>"password-login"));
+												 "label"=>false, "class"=>"txt", "maxlength"=>50, "id"=>"password-login", "value"=>""));
 						?>
                     </dd>
                 </dl>

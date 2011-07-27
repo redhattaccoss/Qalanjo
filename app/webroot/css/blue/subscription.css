@@ -80,6 +80,10 @@
 	display:block;
 	border-radius:7px;
 	border:1px solid #9A9A9A;
+	background:url(../img/blue/subscribe/subscription-non-recur.jpg) repeat-x #fff;
+}
+.subscription-item-recur{
+	background:url(../img/blue/subscribe/subscription-recur.jpg) repeat-x #fff;
 }
 .item-spacer{
 	background-color:#005F9D;
@@ -87,6 +91,9 @@
 	width:14px;
 	display:block;
 	margin-top:70px;
+}
+.item-spacer-no-color{
+	background-color:transparent;
 }
 .subscription-item h2, .subscription-item h3{
 	margin:0;
@@ -130,6 +137,9 @@ div.join a{
 	width:100px;
 	background:url(../img/blue/subscribe/join-now.png) no-repeat;
 	margin-left:45px;
+}
+div.join a.recur{
+	background:url(../img/blue/subscribe/join-now-yellow.png) no-repeat;
 }
 div.control-pay{
 	width:842px;

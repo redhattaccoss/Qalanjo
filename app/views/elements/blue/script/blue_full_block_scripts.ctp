@@ -36,9 +36,6 @@ if ($this->action=="step"){
 }else if (($this->action=="edit")&&($this->name=="Members")){
 	echo $html->css("blue/edit-profile-style", "stylesheet", array('inline'=>false));
 	echo $javascript->link("blue/members/edit-profile-script");
-}else if ($this->action=="questionnaire_success"){
-	echo $html->css("blue/successpage", "stylesheet", array("inline"=>false));
-	echo $javascript->link("blue/members/questionnaire_success");
 }else if ($this->action=="search_result"){
 	echo $html->css("blue/searchresult", "stylesheet", array("inline"=>false));
 }else if ($this->action=="search"){
@@ -60,7 +57,17 @@ if ($this->action=="step"){
 	echo $html->css("blue/subscription", "stylesheet", array("inline"=>false));
 	echo $javascript->link(array("blue/subscription_transactions/details"));
 }else if (($this->action=="success")&&($this->name=="SubscriptionTransactions")){
-	echo $html->css('blue/subscription_success', 'stylesheet', array('inline'=>false));
+	echo $html->css('blue/subscriptionsuccess', 'stylesheet', array('inline'=>false));
+	echo $html->scriptBlock("
+		$(document).ready(function(){
+			$('#button').click(function(){
+				window.location.href='{$html->url("/")}';
+			});
+		});
+	
+	");
+}else if (($this->action=="error")&&($this->name=="SubscriptionTransactions")){
+	echo $html->css('blue/subscriptionfailed', 'stylesheet', array('inline'=>false));
 	echo $html->scriptBlock("
 		$(document).ready(function(){
 			$('#button').click(function(){
@@ -75,4 +82,8 @@ if ($this->action=="step"){
 }else if (($this->name=="Matches")&&($this->action=="index")){
 	echo $html->css("blue/matches-page-style", "stylesheet", array("inline"=>false));
 	echo $javascript->link("blue/matches/index");
+}else if (($this->action=="success")&&($this->name=="CoinAvailTransactions")){
+	echo $html->css("blue/qpointssuccess", "stylesheet", array("inline"=>false));
+}else if (($this->action=="error")&&($this->name=="CoinAvailTransactions")){
+	echo $html->css("blue/qpointsfailed", "stylesheet", array("inline"=>false));
 }

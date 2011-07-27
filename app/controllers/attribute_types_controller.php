@@ -16,7 +16,6 @@ class AttributeTypesController extends AppController {
 		$this->set('attributeType', $this->AttributeType->read(null, $id));
 	}
 
-
 	function admin_add() {
 		if (!empty($this->data)) {
 			$this->AttributeType->create();

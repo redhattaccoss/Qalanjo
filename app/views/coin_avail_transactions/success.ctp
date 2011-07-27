@@ -1,33 +1,31 @@
-<?php 
-	echo $html->css('blue/subscription_success', 'stylesheet', array('inline'=>false));
-	echo $html->scriptBlock("
-		$(document).ready(function(){
-			$('#button').click(function(){
-				window.location.href='{$html->url("/gifts")}';
-			});
-		});
-	
-	");
-?>
-<div class="content-container">
-	<div id="success-wrap" class="span-24">
-		<div class="span-6">
-		<?php 
-			echo $html->image("designs/blue/subscription_transactions/success/EmptyCart-success.png");
-		?>
-		</div>
-		<div id="success" class="left">
-			<div id="success-cont" class="left">
-				<div id="success-text-container" class="left">
-					<h2>Your order has succesfully processed.</h2>
-					<p>Your account has been added additional <?php echo $qpoints?> QPoints.</p>
+<h1 class="forgot">
+<span>Q</span>points
+</h1>
+<div class="qpointssuccess left">
+	<h2> Thank you for your Order!</h2>
+	<div class="shadow">
+	</div>
+</div>
+<div class="left clear orange-side">
+</div>
+<div class="left qpointssuccess-main-container">
+	<form action="#" method="POST">
+		<div class="subscription-coupleback">
+			<div class="qpointssuccess-form">
+				<div class="subscriptionsuccess">
+					<h4>
+					Your Orders has successfully processed.
+					<br />
+					</h4>
+					<p class="detail">You now have <?php echo $qpoints?> Qpoints</p>
 				</div>
 			</div>
-			<div id="btn-wrap" class="clear">
-					<div id="button" class="clear">
-						<p>Back to Gifts</p>
-					</div>
+		</div>
+		<div class="buttonset">
+			<div class="right">
 			</div>
 		</div>
-	</div>
+	</form>
+</div>
+<div class="left orange-side">
 </div>

@@ -50,15 +50,15 @@ class AppController extends Controller {
 		}
 		$this->setup();
 		//$this->boot();
+		
 		if ($this->action=="login"){
 			$this->layout = "home_page";
-			$this->loadHomeContent();
+			
 			
 		}
 		//$this->load_index();
 
 	}
-	
 	function setup(){
 		if (isset($this->Auth)){
 			$this->Auth->userModel = "Member";
@@ -121,6 +121,15 @@ class AppController extends Controller {
 		}
 	}
 	function isAuthorized(){
+		$action = $this->action;
+		if ((action!="admin_login")&&(substr($action, 0, 5)=="admin")){
+			if ($this->Auth->user()){
+				$role = $this->Session->read("Auth.Member.role_id");
+				if ($role==4){
+					return false;
+				}
+			}	
+		}
 		return true;
 	}
 	/**
@@ -145,10 +154,6 @@ class AppController extends Controller {
 				$this->redirect("/members/login");
 			}
 		}
-		
-		
-		
-		
 		if (($action!="not_allowed")||($action!="not_allowed_ajax")){
 			if ($this->isAdmin($action)){
 				return;	
@@ -317,6 +322,10 @@ class AppController extends Controller {
 	 * @see Controller::beforeRender()
 	 */
 	function beforeRender() {
+		if ($this->name=="CakeError"){
+			Configure::write("debug",0);
+			$this->layout = "error_layout";
+		}
 		$gift_path = Configure::read('gift_path');
 		$qpath = Configure::read('upload_path');
 		$uploadsPath = Configure::read('uploadsPath');

@@ -92,8 +92,8 @@ li.gifticon {
 
 .container-left-side img {
 	margin: 0 0 12px 0;
-	min-width: 120px;
-	min-height: 120px;
+	width: 120px;
+	height: 120px;
 	background: #999;
 	display: inline-block;
 }

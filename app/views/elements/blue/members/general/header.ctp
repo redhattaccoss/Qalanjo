@@ -9,7 +9,7 @@
 		</li>
 		<li>
 			<span>
-				<?php echo $html->link("My Searches", array("controller"=>"members", "action"=>"search"))?>
+				<?php echo $html->link("My Photos", array("controller"=>"photos", "action"=>"view"))?>
 			</span>
 		</li>
 		<li class='active'>
@@ -37,7 +37,7 @@
 		</li>
 		<li>
 			<span>
-				<?php echo $html->link("My Searches", array("controller"=>"members", "action"=>"search"))?>
+				<?php echo $html->link("My Photos", array("controller"=>"photos", "action"=>"view"))?>
 			</span>
 		</li>
 		<li>
@@ -65,7 +65,7 @@
 		</li>
 		<li>
 			<span>
-				<?php echo $html->link("My Searches", array("controller"=>"members", "action"=>"search"))?>
+				<?php echo $html->link("My Photos", array("controller"=>"photos", "action"=>"view"))?>
 			</span>
 		</li>
 		<li>
@@ -93,7 +93,7 @@
 		</li>
 		<li>
 			<span>
-				<?php echo $html->link("My Searches", array("controller"=>"members", "action"=>"search"))?>
+				<?php echo $html->link("My Photos", array("controller"=>"photos", "action"=>"view"))?>
 			</span>
 		</li>
 		<li>
@@ -112,7 +112,7 @@
 			</span>
 		</li>
 	<?php 
-		}else if((($this->action=="search")||($this->action=="search_result"))&&($this->name=="Members")){
+		}else if($this->name=="Photos"){
 	?>
 		<li>
 			<span>
@@ -121,7 +121,7 @@
 		</li>
 		<li class='active'>
 			<span>
-				<?php echo $html->link("My Searches", array("controller"=>"members", "action"=>"search"))?>
+				<?php echo $html->link("My Photos", array("controller"=>"photos", "action"=>"view"))?>
 			</span>
 		</li>
 		<li>
@@ -149,7 +149,7 @@
 		</li>
 		<li>
 			<span>
-				<?php echo $html->link("My Searches", array("controller"=>"members", "action"=>"search"))?>
+				<?php echo $html->link("My Photos", array("controller"=>"photos", "action"=>"view"))?>
 			</span>
 		</li>
 		<li>

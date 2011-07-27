@@ -1,0 +1,124 @@
+@font-face{
+	font-family: "Myriad Pro";
+	url("fonts/MYRIADPRO-REGULAR.OTF");
+}
+body{
+	font-family: Arial, Helvetica, sans-serif;
+}
+h1.crop{
+	margin:42px 0 10px 42px;
+	color:#005F9D;
+	font-size:33px;
+	font-family: "Myriad Pro", Arial, Helvetica sans-serif;
+}
+h1.crop span{
+	
+	color:#24A0FF;
+	font-size:33px;
+	font-family: "Myriad Pro", Arial, Helvetica sans-serif;
+}
+.horizontalbar
+{
+    margin:0 0 20px 42px;
+	width:600px;
+	background: url(../img/blue/cropimages/bar.png) no-repeat;
+	height:4px;	
+	float:left;
+}
+.cropimages{
+	
+	background: #F2F9FD;
+	border:1px solid #ccc;
+	min-height:562px;
+	margin:0 42px;
+	width:835px;
+	padding:0;
+}
+.cropimages h2{
+	margin-bottom:9px;
+	font-weight:bolder;
+	font-size:22px;
+	color:#DF8500;
+}
+.cropimages p{
+	margin:-5px 0 8px 0;
+	font-size:13px;
+	font-family: "Myriad Pro", Arial, Helvetica sans-serif;
+	line-height:.5em;
+}
+.cropimages .notifications{
+	width:700px;
+	min-height:34px;
+	background: #FFFBE2;
+	border:1px solid #FFE222;
+	margin: 10px auto 10px auto;
+	padding-top: 10px;
+	text-align: center;
+}
+.cropimages .imagecontainer{
+	width:700px;
+	min-height:460px;
+	background: #FFF;
+	border:1px solid #FFE222;
+	margin: 20px auto 10px auto;
+	padding-top: 0px;
+	text-align: center;
+}
+.cropimages .buttoncontainer{
+	float:right;
+	min-height:40px;
+    margin: 0 65px 10px 0;
+	padding-top: 0px;
+	text-align: center;
+}
+
+
+ul.choices span.label{
+	color:#005F9D;
+	font-size:18px;
+	font-weight: bold;
+}
+dl.choice{
+	margin:0 0 0 30px;
+	padding:0;
+	
+}
+dl.choice dd{
+	padding:0;
+	margin:0;
+}
+dl.choice input[type=text]{
+	width:302px;
+	height:29px;
+	border:1px solid #d3d3d3;
+	padding:5px;
+	font-size:14px;
+}
+label.choice{
+	margin-bottom:23px;
+	display:block;
+}
+.buttonset{
+	width:100%;
+	height:91px;
+	border-top:1px solid #ccc;
+	background: #f3f4f5;
+	border-radius:0 0 10px 10px;
+}
+
+.bottom-shadow{
+	width:855px;
+	height:10px;
+	background:#fff;
+}
+.buttonset .send-instruction{
+	width:122px;
+	height:39px;
+}
+.buttonset div.right{
+	margin:25px 21px 0 0;
+}
+.buttonset .cancel{
+	width:87px;
+	height:39px;
+}

@@ -29,6 +29,9 @@ class MemberProfilesController extends AppController{
 	
 	function process_signup_upload($filename){
 		$member_id = $this->Session->read("Member.id");
+		$this->loadModel("Photo");
+		$this->loadModel("Album");
+		
 		$path = Configure::read("upload_path");
 		$url = WWW_ROOT."img/uploads/$member_id/default/".$filename;
 		//$url = $_SERVER['DOCUMENT_ROOT']."/app/webroot/img/uploads/$member_id/default/".$filename;
@@ -44,14 +47,19 @@ class MemberProfilesController extends AppController{
 				$member = $this->Member->read(null, $member_id);
 				$member["MemberProfile"]["picture_path"]  = $filename;
 				if ($this->MemberProfile->save($member, false)){
-					$this->Member->save_progress($member_id, "step_complete");
+					$album = $this->Album->getDefaultAlbum($member_id);
+					$photo["Photo"]["album_id"] = $album["Album"]["id"];
+					$photo["Photo"]["picture_path"] = $filename; 
+					$this->Photo->create($photo);
+					$this->Photo->save($photo, false);
+					if ($member["Member"]["progress"]!="complete"){
+						$this->Member->save_progress($member_id, "step_complete");
+					}
 				}
 				$temp["result"] = "success";
-				
 			}	
 			
 		}else{
-			$this->Session->setFlash("The upload failed. Please try again.");
 			$temp["result"] = "failed";
 		}	
 		$this->set("response", json_encode($temp));

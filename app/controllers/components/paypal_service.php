@@ -18,6 +18,9 @@ class PaypalServiceComponent extends Object {
 	
 	function initialize($controller, $settings = array()) {
 		$this->controller = $controller;
+		//$this->apiUsername = "somchemist_api1.gmail.com";
+		//$this->apiPassword = "9K8PR5F2W8YYQRJX";
+		//$this->apiSignature = "AThnsaliW3WPQ4LX2IIE-s2zboqrAyc2jUTs3y6D2kFIdNzgS6S4lbQ";
 		$this->apiUsername = "slashe_1310900488_biz_api1.yahoo.com";
 		$this->apiPassword = "1310900528";
 		$this->apiSignature = "AX.5dLv7.5iMnY7uLPzwYM1EpkotAasOWO8OGn04iPYEg0G71sBDOeuL";
@@ -106,7 +109,7 @@ class PaypalServiceComponent extends Object {
 	 */
 	function confirmPayment($finalPaymentAmount) {
 		//reads for token
-		$token = urlencode ( $this->controller->Session->read ( "Payment.token" ) );
+		$token = urlencode ( $this->controller->Session->read ( "TOKEN" ) );
 		$paymentType = urlencode ( $this->controller->Session->read ( "Payment.paymentType" ) );
 		$currencyCodeType = urlencode ( $this->controller->Session->read ( "Payment.currencyCode" ) );
 		$payerID = urlencode ( $this->controller->Session->read ( "Payment.payerId" ) );
@@ -241,11 +244,9 @@ class PaypalServiceComponent extends Object {
 		$nvpstr = "&AMT=".urlencode($paymentInfo["Payment"]["amount"]);
 		$nvpstr .= "&CURRENCYCODE=" . $paymentInfo["Payment"] ["currencyCode"];
 		$nvpstr .= "&PAYMENTACTION=" . $paymentInfo["Payment"] ["paymentType"];
-		$nvpstr .= "&PROFILESTARTDATE".$paymentInfo["Payment"]["startDate"];
-		$nvpstr .= "&BILLINGPERIOD=YEAR";
-		$nvpstr .= "&BILLINGFREQUENCY=4";
-		$nvpstr .= "&L_BILLINGTYPE0=RecurringPayments";
-		$nvpstr .= "&L_BILLINGAGREEMENTDESCRIPTION0=".$paymentInfo["Payment"]["description"];
+		$nvpstr .= "&PROFILESTARTDATE=".$paymentInfo["Payment"]["startDate"];
+		$nvpstr .= "&BILLINGPERIOD=MONTH";
+		$nvpstr .= "&BILLINGFREQUENCY=3";
 		$this->controller->Session->write ( "Payment.paymentType", $paymentInfo ["Payment"] ["paymentType"] );
 		$this->controller->Session->write ( "Payment.currencyCode", $paymentInfo ["Payment"] ["currencyCode"] );
 		$resArray = $this->hash_call ( "SetExpressCheckout", $nvpstr );

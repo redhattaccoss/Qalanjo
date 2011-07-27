@@ -24,48 +24,40 @@
     </div>
     <div id="frames" class="left frames">
         <div id="viewport" class="viewport left">
-            <div class="left subscription-item">
-                <h3 class="months">12 months</h3>
-                <h2 class="subscription-description most-successful">Most Successful</h2>
-                <h2 class="price">$ 22.99</h2>
-                <h3 class="permonth">per month</h3>
-                <div class="join">
-                    <a id="item_1" href="#"></a>
-                </div>
-            </div>
-            <div class="item-spacer left">
-            </div>
-            <div class="left subscription-item">
-                <h3 class="months">6 months</h3>
-                <h2 class="subscription-description top-seller">Top Seller</h2>
-                <h2 class="price">$ 32.99</h2>
-                <h3 class="permonth">per month</h3>
-                <div class="join">
-                    <a id="item_2" href="#"></a>
-                </div>
-            </div>
-            <div class="item-spacer left">
-            </div>
-            <div class="left subscription-item">
-                <h3 class="months">3 months</h3>
-                <h2 class="subscription-description other">Basic Plan</h2>
-                <h2 class="price">$ 42.99</h2>
-                <h3 class="permonth">per month</h3>
-                <div class="join">
-                    <a id="item_3" href="#"></a>
-                </div>
-            </div>
-            <div class="item-spacer left">
-            </div>
-            <div class="left subscription-item">
-                <h3 class="months">1 months</h3>
-                <h2 class="subscription-description other">1 Month Plan</h2>
-                <h2 class="price">$ 49.99</h2>
-                <h3 class="permonth">per month</h3>
-                <div class="join">
-                    <a id="item_4" href="#"></a>
-                </div>
-            </div>
+            <?php 
+            	foreach($types as $type){
+            		$classItem = "";
+            		$classSpace = "";
+            		$classButton = "";
+            		if ($type["SubscriptionType"]["recurring"]==1){
+            			$classItem = " subscription-item-recur";
+            			$classSpace = " item-spacer-no-color";	
+            			$classButton = "recur";
+            		}
+            	?>
+            		<div class="left subscription-item <?php echo $classItem?>">
+		                <h3 class="months"><?php echo $type["SubscriptionType"]["months"]?> months</h3>
+		                <h2 class="subscription-description <?php echo $type["SubscriptionType"]["class"]?>"><?php echo $type["SubscriptionType"]["month"]?></h2>
+		                <h2 class="price">$ <?php echo $type["SubscriptionType"]["price"]?></h2>
+		                <h3 class="permonth">per month</h3>
+		                <div class="join">
+		                	<?php 
+		                		$option = array("class"=>$classButton, "id"=>"item_".$type["SubscriptionType"]["id"]);
+		                		if ($type["SubscriptionType"]["recurring"]==0){
+		                			echo $html->link(" ", "/subscription_transactions/checkout_paypal/".$type["SubscriptionType"]["id"], $option);
+		                		}else{
+		                			echo $html->link(" ", "/subscription_transactions/checkout_recur_paypal/".$type["SubscriptionType"]["id"], $option);
+		                		} 
+		                	?>
+		                    
+		                </div>
+		            </div>
+		            <div class="item-spacer <?php echo $classSpace?> left">
+		            </div>
+            	<?php 	
+            	}
+            ?>
+            
             <div class="control-pay left">
                 <div class="select-method left">
                     <p>
