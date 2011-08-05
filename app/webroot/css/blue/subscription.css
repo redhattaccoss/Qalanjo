@@ -82,6 +82,11 @@
 	border:1px solid #9A9A9A;
 	background:url(../img/blue/subscribe/subscription-non-recur.jpg) repeat-x #fff;
 }
+.subscription-item-spacer{
+	width:196px;
+	height:188px;
+	display:block;
+}
 .subscription-item-recur{
 	background:url(../img/blue/subscribe/subscription-recur.jpg) repeat-x #fff;
 }

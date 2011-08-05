@@ -132,6 +132,10 @@ function validateForm(){
 				required:true,
 				minlength:5
 			},
+			"data[Member][confirm_password]":{
+				required:true,
+				minlength:5
+			},
 			"data[Member][idea_id]":{
 				required:true,
 				defaultSelected:true

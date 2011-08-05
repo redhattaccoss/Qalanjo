@@ -240,7 +240,7 @@ class AppController extends Controller {
 		}else{
 			$this->set ( "member", $member );
 		}
-		
+		$this->set("userId", $member_id);
 		$role = $this->Member->getRole($member_id);
 		$this->set("role", $role);
 		if (!empty($subscription)){

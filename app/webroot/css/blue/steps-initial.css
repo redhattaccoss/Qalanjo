@@ -3,7 +3,7 @@
 	background: url(../img/blue/steps/steps-bg-gradient.png) repeat-x #fff;
 	border-right:1px solid #D3D3D3;
 	display:block;
-	margin:54px 0 0 121px;
+	margin:54px 0 0 116px;
 }
 .arrow-step{
 	background: url(../img/blue/steps/steps-non-highlight.png) no-repeat;
@@ -69,7 +69,7 @@
 	width:656px;
 	height:63px;
 	border:1px solid #D3D3D3;
-	margin:7px 0 0 121px;
+	margin:7px 0 0 116px;
 	display:block;
 	padding:25px 0 0 24px;
 }
@@ -91,7 +91,7 @@
 }
 .spacer{
 	background-color:#CACACA;
-	width:121px;
+	width:116px;
 	height:167px;
 }
 .form-content{
@@ -103,6 +103,7 @@
 	display:block;
 	background: url(../img/blue/steps/form-gradient.jpg) repeat-x;
 	border-radius: 0 0 7px 7px;
+	margin-bottom:210px;
 }
 .form-container{
 	overflow: hidden;
@@ -157,11 +158,11 @@
 	margin-left:84px;
 }
 .form-about textarea{
-	width:529px;
+	width:500px;
 	height:88px;
-	max-width: 529px;
+	max-width: 500px;
 	max-height: 88px;
-	min-width: 529px;
+	min-width: 500px;
 	min-height: 88px;
 	
 }
@@ -182,6 +183,3 @@ a.upload{
 	background: url(../img/blue/steps/choosefile.gif) no-repeat;
 	margin:auto;
 }
-
-
-

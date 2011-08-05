@@ -25,6 +25,7 @@
     <div id="frames" class="left frames">
         <div id="viewport" class="viewport left">
             <?php 
+            	$i=0;
             	foreach($types as $type){
             		$classItem = "";
             		$classSpace = "";
@@ -52,10 +53,27 @@
 		                    
 		                </div>
 		            </div>
+		            <?php 
+		            	if ($i+1==count($types)){
+		            		$classSpace = " item-spacer-no-color";	
+		            	
+		            	}
+		            
+		            ?>
 		            <div class="item-spacer <?php echo $classSpace?> left">
 		            </div>
             	<?php 	
+            		$i++;
             	}
+            	for($i;$i<4;$i++){
+            		?>
+            		<div class="left subscription-item-spacer">
+            		</div>
+            		<div class="item-spacer item-spacer-no-color left">
+		            </div>
+            		<?php 
+            	}
+            	
             ?>
             
             <div class="control-pay left">

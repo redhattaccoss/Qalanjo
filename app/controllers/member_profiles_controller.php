@@ -42,7 +42,7 @@ class MemberProfilesController extends AppController{
 			} else {
 				$image = new SimpleImage();
 				$image->load(WWW_ROOT."img/uploads/$member_id/default/".$filename);
-				$image->resizeToWidth(126);
+				$image->resizeToWidth(180);
 				$image->save(WWW_ROOT."img/uploads/$member_id/default/profile_thumb_".$filename, IMAGETYPE_JPEG, 75, 0755);			
 				$member = $this->Member->read(null, $member_id);
 				$member["MemberProfile"]["picture_path"]  = $filename;

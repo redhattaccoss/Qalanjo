@@ -1,0 +1,72 @@
+body {
+	background-repeat: repeat;
+	background:#F9F9F9;
+	padding-top: 129px;
+}
+.container {
+	z-index: 103;
+	position: relative;
+	min-height: 200px;
+	width: 934px;
+	background: transparent;
+}
+.wrapper-container{
+	position:fixed;
+	overflow:hidden;
+	z-index:90;
+	width:100%;
+	left:0;
+	top:114px;
+}
+.maincontainer {
+	width: 914px;
+	min-height: 200px;
+	margin: 0px auto 0 auto;
+	background:#FFF;
+	display: inline;
+}
+.shadowingleft {
+	width: 10px;
+	min-height: 982px;
+	background:url(../img/fixed/container/rightshadow.png) left no-repeat transparent;
+	display: inline;
+}
+.shadowingright {
+	width: 10px;
+	min-height: 982px;
+	background:url(../img/fixed/container/leftshadow.png) right no-repeat transparent;
+	display: inline;
+}
+.feedback {
+	background: url(../img/fixed/container/floatfeedback.png) no-repeat scroll left top;
+	position: fixed;
+	top: 200px;
+	width: 40px;
+	height: 132px;
+	z-index: 5555;
+	cursor: pointer;
+	right: 0pt;
+}
+
+#overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	opacity:0.5;
+	background: black url(../img/spinner.gif) no-repeat scroll center center;
+	display:none;
+	z-index:999;
+}
+.spinner{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	opacity:0.5;
+	background: black url(../img/spinner.gif) no-repeat scroll center center;
+	display:none;
+	z-index:999;
+}

@@ -51,7 +51,7 @@
 			</div>	
 		</div>
 		<div class="buttonset right">
-			<?php echo $html->link("Skip this step", "/welcome")?>
+			<?php echo $html->link("Skip this step", "/welcome", array("class"=>"skip"))?>
 		</div>
 		
 </div>

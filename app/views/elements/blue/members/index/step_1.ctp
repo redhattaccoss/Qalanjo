@@ -1,6 +1,5 @@
 <?php 
 	echo $html->css(array("blue/steps-initial", "uploadify.css", "blue/questionairedialog"), "stylesheet", array("inline"=>false));
-	$javascript->link("blue/members/step-1", false);
 ?>
 <div class="arrow-steps left">
 	<div class="arrow-step arrow-step-1 left arrow-step-active">

@@ -1,3 +1,6 @@
+<?php 
+	echo $html->css(array("blue/steps-initial", "uploadify.css", "blue/questionairedialog"), "stylesheet", array("inline"=>false));
+?>
 <div class="arrow-steps left">
 	<div class="arrow-step arrow-step-1 left">
 		<div class="number-1 left"></div>

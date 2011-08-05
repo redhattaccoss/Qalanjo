@@ -1,0 +1,145 @@
+.gray-bottom-line
+{
+    height: 8px;
+    width:914px;
+    background:#666;
+    display:inline-block;
+}
+.footer-container
+{
+    height: 180px;
+    width:914px;
+    background:#04356C;
+    border-bottom-left-radius: 8px 8px;
+    border-bottom-right-radius: 8px 8px;
+    display:block;
+}
+.footer-container-callus
+{
+    height: 180px;
+    width:320px;
+    color: #FFF;
+    display:block;
+}
+
+.footer-container-callus div
+{
+    height: 70px;
+    width:220px;
+    padding: 10px 0 0 80px;
+    margin: 23px;
+    background:url(../img/fixed/footer/Q.png) left no-repeat;
+}
+.footer-container-callus h3
+{
+    font-size: 22px;
+    margin-top: 4px;
+    font-weight: bold;
+    color: #ffffff;
+    display: block;
+}
+.footer-container-callus h4
+{
+    font-size: 11px;
+    margin-top: -20px;
+    color:#ccc;
+    display: block;
+}
+
+.footer-container-callus p
+{
+    margin-left: 20px;
+    font-size: 12px;
+    color:#999999;
+    display: block;
+}
+
+.footer-container-links-list
+{
+    height: 180px;
+    width:449px;
+    background:url(../img/fixed/footer/linksfooter.png) center no-repeat;
+    display:block;
+}
+
+.footer-container-links-listorder
+{
+   
+    margin: 30px 0px 0px 40px;
+    width: 130px;
+    list-style: none;
+    list-style-type: none;
+    list-style-image: initial;
+    display: inline-block;
+    padding-bottom: 3px;
+}
+
+.footer-container-links-list li a {
+font: normal 12px Arial, Helvetica, sans-serif;
+color: #C5C5C5;
+text-decoration: none;
+}
+
+.footer-container-links-list li a:hover {
+font: normal 12px Arial, Helvetica, sans-serif;
+color: #fff;
+text-decoration: none;
+}
+
+.footer-container-links-list li a:active {
+font: normal 12px Arial, Helvetica, sans-serif;
+color: #0099FF;
+text-decoration: none;
+}
+
+
+
+.footer-container-findus
+{
+    margin: 40px 30px 0 0;
+    font-size: 16px;
+    color:#CCCCCC;
+    height: 70px;
+    width:110px;
+    display: inline-block;
+}
+
+.footershadow
+{
+    margin: -3px auto 200px -40px;
+    overflow: hidden;
+   	background: url(../img/fixed/footer/footershadow.png) no-repeat;
+	height:9px;
+	width:1014px;
+	border:none;
+	cursor:pointer;
+}
+
+.fb{
+	height:34px;
+	width:33px;
+	margin-right: 3px;
+	background:url(../img/fixed/footer/fbicon.png) no-repeat;
+}
+.fb:hover{
+	background-position:0 -36px;
+}
+.twitter{
+	height:34px;
+	width:33px;
+	margin-right: 3px;
+	background:url(../img/fixed/footer/twittericon.png) no-repeat;
+}
+.twitter:hover{
+	background-position:0 -36px;
+}
+.in{
+	height:34px;
+	width:33px;
+	margin-right: 3px;
+	background:url(../img/fixed/footer/inicon.png) no-repeat;
+}
+.in:hover{
+	background-position:0 -36px;
+}
+

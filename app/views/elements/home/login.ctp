@@ -20,8 +20,7 @@
 						?>
                     </dd>
                 </dl>
-                <button class="right logged-button clear" type="submit">
-                </button>
+                <button class="right logged-button clear" type="submit"></button>
             </fieldset>
  	<div class="right small small-links clear">
 		<?php echo $html->link("I can't access my account", "/members/forgot_password")?>

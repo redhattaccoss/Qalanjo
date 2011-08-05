@@ -33,19 +33,8 @@ class AppModel extends Model{
 										"fieldList"=>$validation)
 									  );
 									  
-		
 		if ($validates){
-			$this->set($data);
-			if (isset($this->data["Member"]["password"])){
-				$this->data["Member"]["password"] = sha1($this->data["Member"]["password"]);
-			}
 			
-			if (isset($this->data["CreditCard"]["card_number"])){
-				$cc = new DGCrypt();
-				$length = strlen($this->data["CreditCard"]["card_number"])-5;
-				$this->data["CreditCard"]["ending"] = substr($this->data["CreditCard"]["card_number"], $length, 4);
-				$this->data["CreditCard"]["card_number"] = $cc->encode($this->data["CreditCard"]["card_number"]);
-			}
 			return $this->save($this->data, false);
 		}
 		

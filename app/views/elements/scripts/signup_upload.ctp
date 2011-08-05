@@ -38,6 +38,18 @@ $(document).ready(function(){
 		if (call==1){
 			showDialog();
 		}
+
+		<?php 
+			if ($this->action=="step"){
+			?>
+				$(".skip").click(function(e){
+					showDialog();
+					e.preventDefault();
+				});
+			
+			<?php 
+			}
+		?>
 	});
 //]]>
 

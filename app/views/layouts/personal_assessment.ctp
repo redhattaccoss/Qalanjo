@@ -1,5 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Qalanjo.com</title>
@@ -7,7 +7,7 @@
 	<?php echo $html->css("blueprint/screen")?>
 	<?php echo $html->css(array("blueprint/print"), "stylesheet", array("media"=>"print"))?>
 	<!--[if IE]><?php echo $html->css("blueprint/ie")?><![endif]-->
-	<?php echo $html->css(array("redmond/jquery.ui.all", "blue/questionnaire", "toastmessage/css/jquery.toastmessage", "blue/footer"))?>
+	<?php echo $html->css(array("redmond/jquery.ui.all", "blue/questionnaire", "toastmessage/css/jquery.toastmessage", "articles/footer"))?>
      <?php 
 			$path = $html->url("/");
 			echo $this->element("scripts/php_javascript", array("url"=>$path));
@@ -97,19 +97,7 @@
                   ?>
                 </div>
             </div>
-            <div class="footer left">
-				<div class="left footer-left">
-                        <div class="left">
-                           <h2 class='qalanjo'>Qalanjo LLC</h2>
-                           <div class="name-company">Copyright &copy; Qalanjo LLC. All Rights Reserved 2011</div>
- 	  	                   <div class="find-us"><span class="left">Find Us on</span><?php echo $html->link(" ", "http://www.facebook.com/pages/Qalanjo/183622908342331", array("class"=>"fb left clear"))?><?php echo $html->link(" ", "#", array("class"=>"twitter left"))?><?php echo $html->link(" ", "#", array("class"=>"rss left"))?></div>
-                        </div>
-                    </div>
-				 <?php echo $this->element("blue/general/footer_link_set_2")?>
-				
-			</div>
-            <div class="gradient-bottom left">
-            </div>
+            <?php echo $this->element("blue/general/footer_link_set_3")?>
         </div>
 </body>
 </html>

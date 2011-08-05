@@ -40,17 +40,20 @@ class Match extends AppModel {
 			
 			$this->create($this->data);
 			$this->save($this->data, false);
+			/*
 			$this->query("INSERT INTO userlist(userid, relationid, friend) VALUES(".$member_id.", ".$match_id.", 'yes')");
 			$this->query("INSERT INTO userlist(userid, relationid, friend) VALUES(".$match_id.", ".$member_id.", 'yes')");
-			
+			*/
 		}else{
 			$member["Match"]["compatibility"] = $data["Match"]["compatibility"];
 			$this->save($member);
+			/*
 			$res =	$this->query("SELECT * FROM userlist WHERE userid = $member_id AND relationid = $match_id");
 			if (empty($res)){
 				$this->query("INSERT INTO userlist(userid, relationid, friend) VALUES(".$member_id.", ".$match_id.", 'yes')");
 				$this->query("INSERT INTO userlist(userid, relationid, friend) VALUES(".$match_id.", ".$member_id.", 'yes')");
-			}	
+			}
+			*/	
 		}
 		
 		$matched = $this->find("first", array("conditions"=>
@@ -208,10 +211,12 @@ class Match extends AppModel {
 	
 	function deleteMatches($member_id){
 		$matches = $this->find("all", array("conditions"=>array("Match.member_id"=>$member_id)));
+		/*
 		foreach($matches as $match){
 			$this->query("DELETE FROM userlist WHERE userid = $member_id AND relationid = {$match["Match"]["matched_id"]}");
 			$this->query("DELETE FROM userlist WHERE userid = {$match["Match"]["matched_id"]} AND relationid = {$member_id}");
 		}
+		*/
 		$this->deleteAll(array("Match.member_id"=>$member_id));
 	}
 	
@@ -224,13 +229,26 @@ class Match extends AppModel {
 		$this->saveField("match_status_id", $status);
 	}
 	
+	/**
+	 * Get for random matched ...
+	 * @param $member_id The member
+	 * @param $type The type of search
+	 * @param $field Fields desired
+	 * @param $limit limit for finding
+	 */
 	function getRandomMatch($member_id, $type = 'all', $field = null, $limit = null) {
 		$query = array('conditions'=> array(
 							'Match.member_id'=>$member_id),
 						'recursive'=> -1,
 						'limit'=> $limit);
 						
-		if(!empty($field)) $query = array('fields'=>array('Match.' . $field));
+		if(!empty($field)){ 
+			if (is_array($field)){
+				$query = array("fields"=>$field);
+			}else{
+				$query = array('fields'=>array('Match.' . $field));
+			}
+		}
 		if($type == 'all') $query = array('order'=>'RAND()');
 		
 		$match = $this->find($type, $query);

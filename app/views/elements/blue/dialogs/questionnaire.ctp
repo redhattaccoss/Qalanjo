@@ -12,7 +12,10 @@
                 payment plan you prefer when you're ready to begin communication with a match."</p>
         </div>
                
-        <div class="button-set right"> <button class="buttontest" type="submit">
-                        </button> 
-                       </div><div class="skipthis span-5 right">Skip this <span>>></span></div>
-    </div>
+        <div class="button-set right">
+        	 <button class="buttontest" type="submit"></button> 
+        </div>
+        <?php /*?>
+        <div class="skipthis span-5 right">Skip this <span>&gt;&gt;</span>
+        */?>
+   </div>

@@ -226,3 +226,9 @@ ol.top{
 ol.letter{
 	list-style-type:lower-alpha;
 }
+
+ul.sitemap li a{
+	font-weight:bold;
+	color:#333;
+	text-decoration:none;
+}

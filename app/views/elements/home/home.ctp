@@ -29,7 +29,7 @@
             <fieldset class="left">
                 <dl class="left">
                     <dt class="left">
-                        <label for="firstName">
+                        <label>
                             First Name: 
                         </label>
                     </dt>
@@ -40,7 +40,7 @@
                         <div class="required"></div>
                     </dd>
                     <dt class="left clear">
-                        <label for="lastName">
+                        <label>
                             Last Name: 
                         </label>
                     </dt>
@@ -52,7 +52,7 @@
                         <div class="required"></div>
                     </dd>
                     <dt class="left clear">
-                        <label for="email">
+                        <label>
                             Email: 
                         </label>
                     </dt>
@@ -65,7 +65,7 @@
                         <div class="required special"></div>
                     </dd>
                     <dt class="left clear">
-                        <label for="confirmEmail">
+                        <label>
                             Confirm Email: 
                         </label>
                     </dt>
@@ -76,7 +76,7 @@
                         
                     </dd>
                     <dt class="left clear">
-                        <label for="password">
+                        <label>
                             Password: 
                         </label>
                     </dt>
@@ -88,20 +88,20 @@
                         </div>
                     </dd>
                     <dt class="left clear">
-                        <label for="password">
+                        <label>
                             Confirm Password: 
                         </label>
                     </dt>
                     
                     <dd class="left">
-                    	<?php echo $form->input("confirm_password", array("id"=>"password","type"=>"password", "div"=>false, "label"=>false, "selected"=>"", "value"=>""))?>
+                    	<?php echo $form->input("confirm_password", array("type"=>"password", "div"=>false, "label"=>false, "selected"=>"", "value"=>""))?>
                         <label class="required">
                         </label>
                     </dd>
                     
                     
                     <dt class="left clear">
-                        <label for="gender" class="gender first">
+                        <label class="gender first">
                             I'm a:
                         </label>
                     </dt>
@@ -111,7 +111,7 @@
 						?>
                     </dd>
                     <dt class="left gender-label">
-                        <label for="gender" class="gender first">
+                        <label class="gender first">
                             Seeking: 
                         </label>
                     </dt>
@@ -122,7 +122,7 @@
 						?>
                     </dd>
                     <dt class="left clear">
-                        <label for="birdthdate"">
+                        <label>
                             Birthday: 
                         </label>
                     </dt>
@@ -133,7 +133,7 @@
 						?>
                     </dd>
                     <dt class="left clear">
-                        <label for="findEH">
+                        <label>
                             How did you hear about us?:
                         </label>
                     </dt>

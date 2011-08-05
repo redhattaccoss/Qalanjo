@@ -1,0 +1,162 @@
+.footer-line {
+	display: inline-block;
+	width: 978px;
+	margin-top: 20px;
+	min-height: 80px;
+	margin-bottom: 0px;
+	background: url(../img/home/footer/footerline.jpg) repeat-x transparent;
+}
+
+.footer {
+	width: 978px;
+	min-height: 181px;
+	background-color: #fff;
+	margin-bottom: 40px;
+	background: url(../img/home/footer/footerback.jpg) bottom repeat-x
+		transparent;
+	display: block;
+}
+
+.footershadow {
+	margin: -40px auto 0px auto;
+	overflow: hidden;
+	background: url(../img/home/footer/footershadow.png) no-repeat;
+	height: 9px;
+	width: 1108px;
+	border: none;
+	cursor: pointer;
+}
+
+.l3_nav {
+	margin-top: -50px;
+	padding-left: 10px;
+	border: none;
+	color: #CCC;
+}
+
+.l3_nav a {
+	text-decoration: none;
+	color: #666;
+	text-shadow: #FFF 0px 1px 0px;
+}
+
+.l3_nav a:hover {
+	text-decoration: none;
+	color: #005F9D;
+}
+
+.l3_nav ul {
+	margin-right: 10px;
+	margin: 1em 1em 0 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+.l3_nav li,li.spacer {
+	list-style: none;
+	font-size: 16px;
+	color: #666;
+	font-weight: bold;
+	text-decoration: none;
+	display: inline;
+}
+
+.l2_nav {
+	margin-top: -10px;
+	padding-left: 10px;
+	border: none;
+	color: #CCC;
+}
+
+.l2_nav a {
+	text-decoration: none;
+	color: #999;
+}
+
+.l2_nav a:hover {
+	text-decoration: none;
+	color: #005F9D;
+}
+
+.l2_nav ul {
+	margin-right: 10px;
+	margin: 1em 1em 0 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+.l2_nav li,li.spacer {
+	list-style: none;
+	font-size: 11px;
+	color: #666;
+	font-weight: bold;
+	text-decoration: none;
+	display: inline;
+}
+
+.name-company {
+	float: left;
+	margin-left: 18px;
+	margin-top: 30px;
+	display: block;
+	width: 400px;
+}
+
+.name-company h4 {
+	text-align: left;
+	font-size: 11px;
+	color: #999;
+	float: left;
+}
+
+.name-company span {
+	margin-top: -10px;
+	text-align: left;
+	font-size: 11px;
+	color: #999;
+	float: left;
+}
+
+.footer-container-findus {
+	margin: -50px 30px 0 0;
+	font-size: 16px;
+	color: #666;
+	font-weight: bold;
+	height: 70px;
+	width: 110px;
+	display: inline-block;
+	text-shadow: #FFF 0px 1px 0px;
+}
+
+.fb {
+	height: 32px;
+	width: 33px;
+	margin-right: 3px;
+	background: url(../img/home/footer/fbicon.png) no-repeat;
+}
+
+.fb:hover {
+	background-position: 0 -33px;
+}
+
+.twitter {
+	height: 32px;
+	width: 33px;
+	margin-right: 3px;
+	background: url(../img/home/footer/twittericon.png) no-repeat;
+}
+
+.twitter:hover {
+	background-position: 0 -33px;
+}
+
+.in {
+	height: 32px;
+	width: 33px;
+	margin-right: 3px;
+	background: url(../img/home/footer/inicon.png) no-repeat;
+}
+
+.in:hover {
+	background-position: 0 -33px;
+}

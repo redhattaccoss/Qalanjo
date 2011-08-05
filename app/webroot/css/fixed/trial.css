@@ -1,0 +1,84 @@
+.main-container{
+	margin-left:24px;
+}
+
+.dottedgray
+{
+    min-height: 750px;
+    background:url(../img/fixed/trial/graydotted.jpg) repeat-x #fff;
+    display:inline-block;
+
+}
+.dottedgray h2
+
+{
+   text-align: left;
+   margin-left: 40px;
+   margin-top: 40px;
+   margin-bottom: 0px;
+   color: #002C71;
+}
+.dottedgray .line
+
+{
+   margin-left: 40px;
+
+}
+.dottedgray p
+{
+    font-size: 12px;
+    margin: 10px 20px 20px 40px;
+    text-align: justify;
+  
+}
+.dottedgray h4
+{
+    font-size: 11px;
+    margin: 10px 20px 40px 40px;
+    color: #666;
+}
+.dottedgray h3
+{
+    font-size: 13px;
+    margin: 10px 20px 10px 40px;
+    font-weight: bold;
+    color: #002C71;
+}
+.dottedgray dt
+{
+    font-size: 12px;
+    margin: 0px 10px 0px 80px;
+    font-weight: bold;
+    color: #666;
+    font-style: italic;
+}
+.radio
+{
+    font-size: 12px;
+    vertical-align:top;
+}
+
+.fontjustify
+{
+   text-align: right;
+   margin-right: 20px;
+   margin-top: 20px;
+}
+
+.alignitem
+{
+   margin-left: 40px;
+   margin-top: 20px;
+   display: inline;
+  
+}
+.speakerimg
+{
+   float: left;
+    width: 178px;
+    height: 146px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+

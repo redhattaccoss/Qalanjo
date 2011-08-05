@@ -1,0 +1,46 @@
+body {
+	background-repeat: repeat;
+	background: url(../img/home/container/backimage.jpg) bottom repeat-x
+		#F9F9F9;
+}
+
+.container {
+	position: relative;
+	height: 1460px;
+	width: 1000px;
+	background: transparent;
+}
+
+.wrapper-container {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	left: 0;
+}
+
+.maincontainer {
+	width: 978px;
+	height: 1468px;
+	background: url(../img/home/home/couple.jpg) no-repeat #fff;
+	overflow: visible;
+	border: 1px solid #CCC;
+	position: relative;
+	margin-bottom: 40px;
+	display: inline;
+}
+
+.shadowingleft {
+	width: 10px;
+	height: 982px;
+	background: url(../img/home/container/rightshadow.png) left no-repeat
+		transparent;
+	display: inline;
+}
+
+.shadowingright {
+	width: 10px;
+	height: 982px;
+	background: url(../img/home/container/leftshadow.png) right no-repeat
+		transparent;
+	display: inline;
+}

@@ -1,5 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
     	<title>Qalanjo.com</title>
         
@@ -32,7 +32,7 @@
                			?>
                			<?php echo $html->link(" ", "/", array("class"=>"find-my-match right clear"))?>
                		</div>
-               	</div>d
+               	</div>
                	<?php 
                		echo $this->element("blue/general/about_us_header");
                	?>
@@ -49,10 +49,11 @@
                					echo $html->image("/css/img/blue/aboutus/fb-big.png", array("class"=>"left"))
                				?>
                				<div class="left">
-               					<span class="left">like us on</span> <span class="left clear fb-name">Facebook</h2>
+               					<span class="left">like us on</span>
+               					<span class="left clear fb-name">Facebook</span>
                				</div>
                				<div class="left clear">
-               					<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FQalanjo%2F183622908342331&amp;width=200&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=true&amp;header=true&amp;height=556" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:556px;" allowTransparency="true"></iframe>
+               					<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FQalanjo%2F183622908342331&amp;width=200&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=true&amp;header=true&amp;height=556" style="border:none; overflow:hidden; width:200px; height:556px;"></iframe>
                				</div>
                			</div>
                		</div>
@@ -76,18 +77,20 @@
             <div class="shadow shadow-last left">
             </div>
         </div>
+        
+         <script type="text/javascript">
+	
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-23493927-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		
+		</script>
     </body>
-    <script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-23493927-1']);
-	  _gaq.push(['_trackPageview']);
-	
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-	
-	</script>
+   
 </html>
