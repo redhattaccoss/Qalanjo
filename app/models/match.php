@@ -244,12 +244,13 @@ class Match extends AppModel {
 						
 		if(!empty($field)){ 
 			if (is_array($field)){
-				$query = array("fields"=>$field);
+				
+				$query["fields"] = $field;
 			}else{
-				$query = array('fields'=>array('Match.' . $field));
+				$query["fields"] = array('fields'=>"Match.".$field);
 			}
 		}
-		if($type == 'all') $query = array('order'=>'RAND()');
+		if($type == 'all') $query["order"] = 'RAND()';
 		
 		$match = $this->find($type, $query);
 		

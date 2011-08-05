@@ -23,5 +23,8 @@ class Shout extends AppModel {
 		return $this->find("first", array("conditions"=>array("Shout.member_id"=>$memberId, "Shout.created BETWEEN '".$dateFrom."' AND '".$dateTo."'"),
 									"order"=>"RAND()", "recursive"=>-1));
 	}
+	
+	function hasShout($memberId){
+		return $this->loadRandomShout($memberId)!=null;
+	}
 }
-?>
