@@ -341,10 +341,12 @@
 	text-align: left;
 	font-family: Arial;
 }
-.user-info img {
+.user-info img.profile {
 	margin-right: 10px;
 	display: inline-block;
 	float: left;
+	height:99px;
+	width:99px;
 }
 .user-info span {
 	display:block;

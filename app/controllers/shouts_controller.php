@@ -9,6 +9,8 @@ class ShoutsController extends AppController{
 	
 	function load_shouts($memberId=null){
 		$this->loadModel("Member");
+		$this->loadModel("Country");
+		
 		if ($memberId==null){
 			$memberId = $this->Session->read("Member.id");
 			$approach = "match";
@@ -55,8 +57,12 @@ class ShoutsController extends AppController{
 																	array("conditions"=>array("MemberProfile.member_id"=>$memberId),
 																		  "recursive"=>-1,
 																		   "fields"=>array("picture_path")));																
+					$country = $this->Country->find("first", array("conditions"=>
+																		array("Country.id"=>$member["Member"]["country_id"])));
 					$shout["Member"] = $member["Member"];
-					$shout["MemberProfile"] = $profile["MemberProfile"]; 			
+					$shout["Member"]["age"] = $this->Member->MemberProfile->getAgeV2($match["Match"]["matched_id"]);
+					$shout["MemberProfile"] = $profile["MemberProfile"];
+					$shout["Country"] = $country["Country"]; 			
 					$shouts[] = $shout;	
 				}
 			}

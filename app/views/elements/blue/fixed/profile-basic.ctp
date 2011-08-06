@@ -99,7 +99,7 @@
 		</div>
 		<div class="profile-progress-notify">
 
-			<h3> Hi, <?php echo $user["Member"]["firstname"]?></h3>
+			<h3> Hi, <?php echo $member["Member"]["firstname"]?></h3>
 			<h3>
 			You have
 			<span id="match-count"></span> new matches

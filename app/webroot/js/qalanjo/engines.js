@@ -175,6 +175,16 @@ var MembersIndexEngine = function(){//implements Engine
 }
 MembersIndexEngine.prototype = {
 	start:function(params){
+		var sc = new ShoutsController();
+		sc.loadInitial();
+		
+		$("#recent-activity-link").click(function(e){ //recent activity link was clicked
+			if (!$(this).hasClass("active")){
+				sc.loadInitial();
+			}
+			e.preventDefault();
+		});
+		
 		/**
 		 * Event handler definition for toggle profile link
 		 */
@@ -197,8 +207,6 @@ MembersIndexEngine.prototype = {
 			window.location.href = QalanjoGlobal.baseUrl+"matches";
 			e.preventDefault();
 		});
-		
-		
 		
 	},
 	scope:function(self){
