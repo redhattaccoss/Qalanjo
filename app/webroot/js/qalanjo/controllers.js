@@ -23,6 +23,7 @@ AppController.prototype = {
 	}
 	,success:function(data){
 		this.callback(data);
+		this.url = null;
 	}
 	,process:function(){
 		var self = this;
@@ -42,6 +43,7 @@ AppController.prototype = {
 				self.success(data);
 			});
 		}
+		this.url = null;
 	},
 	setMethod:function(method){
 		this.method = method;
@@ -86,9 +88,11 @@ var ShoutsController = function(url, target){//inherits AppController
 extend(ShoutsController, AppController);
 ShoutsController.prototype.post = function(data, target){
 		this.serialize = data;
-		this.setCallBack(this.shoutSuccessCallback);
+		this.setCallback(this.postSuccessCallback);
 		this.action = "post";
-		this.target = "#"+target;
+		if (target!=null){
+			this.target = "#"+target;	
+		}
 		this.method = "POST";
 		this.process();
 	};
@@ -105,5 +109,5 @@ ShoutsController.prototype.loadInitialSuccessCallback = function(data){
 	this.view.loadInitial(data);
 };
 ShoutsController.prototype.postSuccessCallback = function(data){
-	
+	this.view.post(data);
 };

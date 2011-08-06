@@ -27,9 +27,9 @@
 			</li>
 
 		</ul>
-	
+		<?php echo $form->create("Shout", array("id"=>"shoutbox"))?>
 		<div class=" textarea">
-			<input name="message" type="text" class="message" maxlength="200" value="" id="" />
+			<?php echo $form->input("message", array("id"=>"shoutbox-message", "value"=>"", "class"=>"message", "div"=>false, "label"=>false))?>
 		</div>
 
 		<div class="max-length">
@@ -39,7 +39,8 @@
 		<div class="button-set">
 			<button class="buttonshare" type="submit"></button>
 		</div>
-
+		<?php echo $form->input("Shout.member_id", array("value"=>$member["Member"]["id"], "type"=>"hidden"))?>
+		<?php echo $form->end()?>
 	</div>
 	<div id="update-box">
 		<ul>

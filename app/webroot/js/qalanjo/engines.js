@@ -178,7 +178,17 @@ MembersIndexEngine.prototype = {
 		var sc = new ShoutsController();
 		sc.loadInitial();
 		
-		$("#recent-activity-link").click(function(e){ //recent activity link was clicked
+		$("#shoutbox").submit(function(e){
+			if ($.trim($("#shoutbox-message").val())!=""){
+				sc.post($(this).serialize());				
+			}
+			return false;
+		})
+		
+		/**
+		 * Recent activity was clicked
+		 */
+		$("#recent-activity-link").click(function(e){
 			if (!$(this).hasClass("active")){
 				sc.loadInitial();
 			}
