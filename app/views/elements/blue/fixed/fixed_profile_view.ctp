@@ -8,7 +8,7 @@
 		</div>
 
 		<ul>
-			<li>
+			<li class="active">
 				<?php 
 					echo $html->link("Recent Activity", "/activities/recent", array("class"=>"active", "id"=>"recent-activity-link"))
 				?>

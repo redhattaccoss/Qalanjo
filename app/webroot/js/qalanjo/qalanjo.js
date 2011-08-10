@@ -19,14 +19,16 @@ QalanjoEngine.prototype = {
 		engine.start(QalanjoGlobal.params);
 		sessionChecker = new SessionChecker();
 		sessionChecker.start();
+		$(window).scroll(function(){
+			$(".container").css("margin-top", "-"+$(this).scrollTop()+"px");
+		});
 	},
 	resize:function(){
 		var wrapperHeight = $(".wrapper-container").css("height").split("p");
 		$("body").css("height", (wrapperHeight[0]-179)+"px");
 		QalanjoGlobal.scrollHeight = $("body").css("height");
-		$(window).scroll(function(){
-			$(".container").css("margin-top", "-"+$(this).scrollTop()+"px");
-		});
+		
+		$(window).scrollTop(0);
 	}
 };
 var q;

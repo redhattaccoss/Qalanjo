@@ -106,7 +106,8 @@
 	cursor: pointer;
 }
 
-.profile-info-profile-details .item-links li a:active {
+
+.profile-info-profile-details .item-links li.active a{
 	display: inline;
 	text-decoration: none;
 	margin: 0px 0 0 0;
@@ -316,24 +317,7 @@
 	text-shadow: white 0px 1px 0px;
 }
 
-.profile-feeds li a:hover {
-	display: block;
-	margin-top: 0px;
-	padding: 15px 30px 14px 30px;
-	list-style: none;
-	font-size: 22px;
-	font-weight: bold;
-	height: 42px;
-	color: #48ABF7;
-	background: url(../img/fixed/profile/tab-line-arrow.jpg) center bottom
-		no-repeat, url(../img/fixed/profile/tab-line-arrowline.jpg) bottom
-		repeat-x #FFF;
-	cursor: pointer;
-	font-family: Arial;
-	text-shadow: #CCC 0px 1px 0px;
-}
-
-.profile-feeds li a:active {
+.profile-feeds li a.active {
 	display: block;
 	margin-top: 0px;
 	padding: 15px 30px 14px 30px;

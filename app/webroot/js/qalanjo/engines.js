@@ -204,15 +204,25 @@ MembersIndexEngine.prototype = {
 			e.preventDefault();
 		});
 		
+		
+		$(".profile-feeds li a").click(function(e){
+			$(".profile-feeds li a.active").removeClass("active");
+			$(this).addClass("active");
+			e.preventDefault();
+		});
+		
 		/**
 		 * Event handler definition for toggle profile link
 		 */
 		$(".toggle-profile-link").click(function(e){
+			var item = $(this);
 			$("#item-links-content").html("<div class='spinner'>Loading...</div>");
 			$.get($(this).attr("href"), function(data){
 				var data = $.parseJSON(data);
 				if (data.result==1){
 					$("#item-links-content").html("");
+					$(".profile-info-profile-details .item-links li.active").removeClass("active");
+					item.parent("li").addClass("active");
 					$("<p>"+data.info+"</p>").appendTo("#item-links-content").hide().fadeIn();
 				}
 			});

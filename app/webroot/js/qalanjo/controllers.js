@@ -83,6 +83,7 @@ MembersController.prototype.loadProfile = function(id){
 	this.process();
 }
 MembersController.prototype.loadProfileSuccess = function(data){
+	$("#shoutbox").hide();
 	$("#update-box").addClass("about-me");
 	$("#update-box").html(data);
 	q.resize();

@@ -166,7 +166,7 @@ class File extends Object {
 			}
 		}
 
-		$this->handle = fopen($this->path, $mode);
+		$this->handle = @fopen($this->path, $mode);
 		if (is_resource($this->handle)) {
 			return true;
 		}
