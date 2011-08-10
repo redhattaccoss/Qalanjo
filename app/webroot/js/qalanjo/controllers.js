@@ -75,7 +75,29 @@ MembersController.prototype.getDetails = function(info){
 	this.target = "";
 	this.process();
 }
+MembersController.prototype.loadProfile = function(id){
+	this.action = "profile_ajax";
+	this.method = "GET";
+	this.url = this.createUrl()+"/"+id;
+	this.setCallback(this.loadProfileSuccess);
+	this.process();
+}
+MembersController.prototype.loadProfileSuccess = function(data){
+	$("#update-box").addClass("about-me");
+	$("#update-box").html(data);
+	q.resize();
+}
+MembersController.prototype.loadCounters = function(){
+	this.action = "count_countables";
+	this.method = "GET";
+	this.setCallback(this.loadCountersSuccess);
+	this.process();
+}
 
+MembersController.prototype.loadCountersSuccess = function(data){
+	var counts = $.parseJSON(data);
+	$("#match-count").text(counts.matchCount);
+}
 
 /**
  * Shout Controller
@@ -87,15 +109,15 @@ var ShoutsController = function(url, target){//inherits AppController
 };
 extend(ShoutsController, AppController);
 ShoutsController.prototype.post = function(data, target){
-		this.serialize = data;
-		this.setCallback(this.postSuccessCallback);
-		this.action = "post";
-		if (target!=null){
-			this.target = "#"+target;	
-		}
-		this.method = "POST";
-		this.process();
-	};
+	this.serialize = data;
+	this.setCallback(this.postSuccessCallback);
+	this.action = "post";
+	if (target!=null){
+		this.target = "#"+target;	
+	}
+	this.method = "POST";
+	this.process();
+};
 ShoutsController.prototype.loadInitial = function(target){
 	this.setCallback(this.loadInitialSuccessCallback);
 	this.action = "load_shouts";
@@ -111,3 +133,19 @@ ShoutsController.prototype.loadInitialSuccessCallback = function(data){
 ShoutsController.prototype.postSuccessCallback = function(data){
 	this.view.post(data);
 };
+var PhotoUpdatesController = function(){//inherits AppController
+	AppController.call(this);
+	this.controller = "photo_updates";
+	this.view = new PhotoUpdatesView();
+}
+extend(PhotoUpdatesController, AppController);
+PhotoUpdatesController.prototype.loadInitial = function(){
+	this.setCallback(this.loadInitialSuccess);
+	this.action = "load_updates_json";
+	this.process();
+	
+}
+PhotoUpdatesController.prototype.loadInitialSuccess = function(data){
+	this.view.loadInitial(data);
+}
+

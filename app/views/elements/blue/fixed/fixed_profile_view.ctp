@@ -16,13 +16,13 @@
 
 			<li>
 				<?php 
-					echo $html->link("Profile", "/members/profile")
+					echo $html->link("Profile", "/members/profile", array("id"=>"profile-link"));
 				?>
 			</li>
 
 			<li>
 				<?php 
-					echo $html->link("Photos", "/photos")
+					echo $html->link("Photos", "/photos", array("id"=>"photo-link"))
 				?>
 			</li>
 

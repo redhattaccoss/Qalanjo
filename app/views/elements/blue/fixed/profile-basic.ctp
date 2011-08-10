@@ -8,7 +8,7 @@
 	$path = "/css/img/blue/index/";
 
 ?>
-<div class="profile-info left">
+<div class="profile-info-container left">
 	<div class="profile-info-profile-pic left">
 		<div class="profile-info-profile-pic-container">
 			<?php 

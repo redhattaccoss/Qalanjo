@@ -60,21 +60,20 @@ class ShoutsController extends AppController{
 		}else{
 			$matches = $this->Member->Match->getRandomMatch($memberId, "all", array("Match.matched_id"), 30);
 			$shouts = array();
-			$noshouts = array();
 			$hasShouts = array();
 			foreach($matches as $match){
 				if ($this->Shout->hasShout($match["Match"]["matched_id"])){
 					$hasShouts[] = $match;			
 				}
 			}
-			if (!empty($matches)){
+			if (!empty($hasShouts)){
 				for($i=0;$i<10;$i++){
 					if (count($hasShouts)>=30){
 						$index = rand(0, 29);
 					}else{
 						$index = rand(0, count($hasShouts)-1);
 					}
-					$match = $matches[$index];
+					$match = $hasShouts[$index];
 					$shout = $this->Shout->loadRandomShout($match["Match"]["matched_id"]);
 					$onShout = false;
 					foreach($shouts as $temp){
@@ -92,7 +91,7 @@ class ShoutsController extends AppController{
 													   "recursive"=>-1));
 					
 					$profile = $this->Member->MemberProfile->find("first", 
-																	array("conditions"=>array("MemberProfile.member_id"=>$memberId),
+																	array("conditions"=>array("MemberProfile.member_id"=>$member["Member"]["id"]),
 																		  "recursive"=>-1,
 																		   "fields"=>array("picture_path")));																
 					$country = $this->Country->find("first", array("conditions"=>

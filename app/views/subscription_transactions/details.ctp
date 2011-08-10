@@ -37,10 +37,16 @@
             		}
             	?>
             		<div class="left subscription-item <?php echo $classItem?>">
-		                <h3 class="months"><?php echo $type["SubscriptionType"]["months"]?> months</h3>
+            			<?php 
+            				if ($type["SubscriptionType"]["months"]==1){
+            			?>
+		                	<h3 class="months"><?php echo $type["SubscriptionType"]["months"]?> month</h3>
+		                <?php }else{?>
+		                	<h3 class="months"><?php echo $type["SubscriptionType"]["months"]?> months</h3>
+
+		                <?php }?>
 		                <h2 class="subscription-description <?php echo $type["SubscriptionType"]["class"]?>"><?php echo $type["SubscriptionType"]["month"]?></h2>
 		                <h2 class="price">$ <?php echo $type["SubscriptionType"]["price"]?></h2>
-		                <h3 class="permonth">per month</h3>
 		                <div class="join">
 		                	<?php 
 		                		$option = array("class"=>$classButton, "id"=>"item_".$type["SubscriptionType"]["id"]);

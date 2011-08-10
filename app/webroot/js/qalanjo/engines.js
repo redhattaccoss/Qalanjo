@@ -177,7 +177,10 @@ MembersIndexEngine.prototype = {
 	start:function(params){
 		var sc = new ShoutsController();
 		sc.loadInitial();
-		
+		var mc = new MembersController();
+		mc.loadCounters();
+		var photoC = new PhotoUpdatesController();
+		MessageBoxHelper.start();
 		$("#shoutbox").submit(function(e){
 			if ($.trim($("#shoutbox-message").val())!=""){
 				sc.post($(this).serialize());				
@@ -189,9 +192,15 @@ MembersIndexEngine.prototype = {
 		 * Recent activity was clicked
 		 */
 		$("#recent-activity-link").click(function(e){
-			if (!$(this).hasClass("active")){
-				sc.loadInitial();
-			}
+			sc.loadInitial();
+			e.preventDefault();
+		});
+		
+		/**
+		 * Profile link was clicked
+		 */
+		$("#profile-link").click(function(e){
+			mc.loadProfile(QalanjoUserGlobal.authUserId);
 			e.preventDefault();
 		});
 		
@@ -209,7 +218,13 @@ MembersIndexEngine.prototype = {
 			});
 			e.preventDefault();
 		});
-	
+		/**
+		 * When photo was clicked
+		 */
+		$("#photo-link").click(function(e){
+			photoC.loadInitial();
+			e.preventDefault();
+		});
 		/**
 		 * Event for viewing matches
 		 */

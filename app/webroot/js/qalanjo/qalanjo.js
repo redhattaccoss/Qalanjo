@@ -14,21 +14,23 @@ var QalanjoEngine = function(baseUrl, controller, action, params, webroot, userI
 
 QalanjoEngine.prototype = {
 	start:function(){
+		this.resize();
+		var engine = EngineFactory.create(QalanjoGlobal.controller, QalanjoGlobal.action);
+		engine.start(QalanjoGlobal.params);
+		sessionChecker = new SessionChecker();
+		sessionChecker.start();
+	},
+	resize:function(){
 		var wrapperHeight = $(".wrapper-container").css("height").split("p");
-		
 		$("body").css("height", (wrapperHeight[0]-179)+"px");
 		QalanjoGlobal.scrollHeight = $("body").css("height");
 		$(window).scroll(function(){
 			$(".container").css("margin-top", "-"+$(this).scrollTop()+"px");
 		});
-		var engine = EngineFactory.create(QalanjoGlobal.controller, QalanjoGlobal.action);
-		engine.start(QalanjoGlobal.params);
-		sessionChecker = new SessionChecker();
-		sessionChecker.start();
 	}
 };
-
+var q;
 $(document).ready(function(){
-	var q = new QalanjoEngine(qalanjo_url, qalanjo_controller, qalanjo_action, qalanjo_params, qalanjo_webroot, qalanjo_userid);
+	q = new QalanjoEngine(qalanjo_url, qalanjo_controller, qalanjo_action, qalanjo_params, qalanjo_webroot, qalanjo_userid);
 	q.start();
 });

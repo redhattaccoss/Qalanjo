@@ -591,10 +591,16 @@ class MembersController extends AppController {
 			}
 			$this->set ( "firstViewed", $firstViewed );
 		} else {
-			$this->Session->setFlash ( "User does not exist" );
-			$this->redirect ( "/" );
+			if (!$this->RequestHandler->isAjax()){
+				$this->redirect ( "/" );
+			}
 		}
 	
+	}
+	
+	function profile_ajax($id){
+		$this->profile($id);
+		$this->layout = "ajax";
 	}
 	
 	private function loadProfileAnswers($member_id) {
@@ -630,22 +636,6 @@ class MembersController extends AppController {
 		$this->set ( "types", $types );
 	}
 	
-	/**
-	 *
-	 * Controller for viewing the profile ...
-	 * @param $key it could be the username or the userid.
-	 */
-	
-	function profile_ajax($key = "") {
-		$this->layout = "ajax";
-		$member = $this->Member->get_by_key ( $key );
-		if ($member) {
-			$this->set ( "member", $member );
-			$this->Notifier->recordViewActivity ( $member ["Member"] ["id"] );
-		} else {
-			$this->Session->setFlash ( "User does not exist" );
-		}
-	}
 	
 	/**
 	 * 
@@ -1676,13 +1666,14 @@ class MembersController extends AppController {
 	}
 	
 	/**
-	 * Count inbox photos ...
+	 * Counts for inbox, photos, matches ...
 	 */
-	function count_inbox_photos(){
+	function count_countables(){
 		if ($this->RequestHandler->isAjax()){
 			$member_id = $this->Session->read("Member.id");
 			$this->loadModel("Album");
 			$this->loadModel("ReceiveMessage");
+			$this->loadModel("Match");			
 			$count = 0;
 			$albums = $this->Album->find("all", array("conditions"=>array("Photo.member_id"=>$member_id)));
 			foreach($albums as $album){
@@ -1690,6 +1681,7 @@ class MembersController extends AppController {
 			}
 			$response["photoCount"] = $count;
 			$response["inboxCount"] = $this->ReceiveMessage->find("count", array("conditions"=>array("ReceiveMessage.member_id"=>$member_id, "ReceiveMessage.message_status_id"=>2)));
+			$response["matchCount"] = $this->Match->countMatch($member_id, 1);
 			$this->set("response", json_encode($response));
 			$this->render ( "/elements/response", "ajax" );
 		}

@@ -179,12 +179,7 @@
 						}
 					?>
 				</dd>
-				<dt>
-					Want Kids
-				</dt>
-				<dd>
-					No
-				</dd>
+				
 				<dt>
 					Kids at Home
 				</dt>

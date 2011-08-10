@@ -10,11 +10,9 @@
 				<h2 class="left"><span class="right">Order Summary</span></h2>
 				<div class="order-summary left">
 					<div class="description left">
-						<?php echo $selectedSubscription["SubscriptionType"]["name"]?> months
+						<?php echo $selectedSubscription["SubscriptionType"]["months"]?> months subscription
 					</div>
 					<div class="details right">
-						<span class="right"><?php echo $selectedSubscription["SubscriptionType"]["months"]?> month/s</span>
-						<span class="times left clear">X</span>
 						<span class="right">$<?php echo $selectedSubscription["SubscriptionType"]["price"]?></span>
 							
 					</div>
@@ -22,7 +20,7 @@
 						Total Amount
 					</div>
 					<div class="total right amount">
-						<span class="right">$ <?php echo round($selectedSubscription["SubscriptionType"]["price"]*$selectedSubscription["SubscriptionType"]["months"], 2)?></span>
+						<span class="right">$ <?php echo round($selectedSubscription["SubscriptionType"]["price"], 2)?></span>
 					</div>
 				</div>
 			</div>

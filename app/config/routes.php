@@ -40,6 +40,8 @@
 	Router::connect('/company_overview', array('controller' => 'pages', 'action' => 'display', 'company_overview'));
 	
 	Router::connect('/terms', array('controller' => 'pages', 'action' => 'display', "terms"));
+	Router::connect('/sitemap', array('controller' => 'pages', 'action' => 'display', "sitemap"));
+	
 	Router::connect('/why', array('controller' => 'pages', 'action' => 'display', "why"));
 	Router::connect('/affiliates', array('controller' => 'pages', 'action' => 'display', "affiliates"));
 	Router::connect('/contactus', array('controller' => 'pages', 'action' => 'display', "contactus"));
@@ -64,7 +66,10 @@
 	Router::connect("/checkout/*", array("controller"=>"SubscriptionTransactions", "action"=>"checkout"));
 	Router::connect("/checkout_paypal/*", array("controller"=>"SubscriptionTransactions", "action"=>"checkout_paypal"));
 	Router::connect("/qpoints/checkout/*", array("controller"=>"CoinAvailTransactions", "action"=>"checkout"));
+	
+	Router::connect("/qpoints/success/*", array("controller"=>"CoinAvailTransactions", "action"=>"success"));
 	Router::connect("/qpoints/checkout_paypal/*", array("controller"=>"CoinAvailTransactions", "action"=>"checkout_paypal"));	
+	
 	Router::connect("/qpoints/success_paypal/*", array("controller"=>"CoinAvailTransactions", "action"=>"success_paypal"));
 	Router::connect("/qpoints/cancel_paypal/*", array("controller"=>"CoinAvailTransactions", "action"=>"cancel_paypal"));	
 	Router::connect("/qpoints/buy/*", array("controller"=>"CoinAvailTransactions", "action"=>"buy"));

@@ -48,5 +48,25 @@ class PhotoUpdate extends AppModel {
 	function deleteUpdate($album_id, $member_id) {
 		
 	}
+	
+	
+/**
+	 * Load Random photo update of a member ...
+	 * @param $memberId The member
+	 */
+	function loadUpdate($memberId){
+		$dateFrom = date("Y-m-d h:i:s", strtotime("-3 days"));
+		$dateTo = date("Y-m-d h:i:s");
+		return $this->find("first", array("conditions"=>array("PhotoUpdate.member_id"=>$memberId, "PhotoUpdate.created BETWEEN '".$dateFrom."' AND '".$dateTo."'"),
+									"order"=>"RAND()"));
+	}
+	
+	/**
+	 * Check if the user has a photo update ...
+	 * @param $memberId
+	 */
+	function hasUpdate($memberId){
+		return $this->loadUpdate($memberId)!=null;		
+	}
 
 }
