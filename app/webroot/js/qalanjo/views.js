@@ -42,16 +42,16 @@ ShoutsView.prototype.getShoutTemplate = function(item){
 	var url = QalanjoGlobal.baseUrl;
 	var userid = QalanjoUserGlobal.authUserId;
 	var tpl = " <li class=\"user-info\">";
-	tpl+="<img src=\"@picture_path\" class='profile'/>";
-	tpl+="<h4>@fullname</h4>";
+	tpl+="<a href='@profilePicturePath'><img src=\"@picture_path\" class='profile'/></a>";
+	tpl+="<h4><a href='@profilePath'>@fullname</a></h4>";
 	tpl+="<div class='user-controls'>";		
-		tpl+="<a href='@gift_url'><img src=\""+url+"css/img/fixed/profile/gifticon.jpg\"/></a>"+"<a href='#'><img src=\""+url+"css/img/fixed/profile/icebreaker.png\"/></a>"+"<a href='#'><img src=\""+url+"css/img/fixed/profile/winkicon.jpg\" class='winker' id='wink_@id'/></a>"+"<a href='#'><img src=\""+url+"css/img/fixed/profile/messageicon.jpg\"/></a>";
+		tpl+="<a href='@gift_url'><img src=\""+url+"css/img/fixed/profile/gifticon.jpg\"/></a>"+"<a href='#'><img src=\""+url+"css/img/fixed/profile/icebreaker.png\"/></a>"+"<a href='#' ><img src=\""+url+"css/img/fixed/profile/winkicon.jpg\" class='winker' id='wink_@id'/></a>"+"<a href='#' id='message_@messageid' class='match-messager'><img src=\""+url+"css/img/fixed/profile/messageicon.jpg\"/></a>";
 	tpl+="</div>";
 	tpl+="<span>@age years old</span><span>@address</span><span>@country</span><span>&nbsp;</span>";
 	tpl+="<div class=\"message-box-arrow\"></div>";
     tpl+="<div class=\"message-box\"><p>@message</p></div><hr/></li>";
-   
-    
+
+    var profile = url+"members/profile/"+item.Member.id;
     var picture = url+"img/uploads/"+item.Member.id+"/default/profile_thumb_"+item.MemberProfile.picture_path;
 	var address = "";
 	if ($.trim(item.Member.address1)!=""){
@@ -63,6 +63,9 @@ ShoutsView.prototype.getShoutTemplate = function(item){
 	if ($.trim(item.Member.state)!=""){
 		address+=item.Member.state;
 	}
+	tpl = tpl.replace("@messageid", item.Member.id);
+	tpl = tpl.replace("@profilePicturePath", profile);
+	tpl = tpl.replace("@profilePath", profile);
 	tpl = tpl.replace("@id", item.Member.id);
     tpl = tpl.replace("@picture_path", picture);
 	tpl = tpl.replace("@fullname", item.Member.firstname+" "+item.Member.lastname);
@@ -96,10 +99,10 @@ PhotoUpdatesView.prototype.loadInitial = function(data){
 PhotoUpdatesView.prototype.getPhotoUpdatesTemplate = function(item){
 	var url = QalanjoGlobal.baseUrl;
 	var tpl = " <li class=\"user-info clear\">";
-	tpl+="<img src=\"@picture_path\" class='profile'/>";
-	tpl+="<h4>@fullname</h4>";
+	tpl+="<a href='@profilePicturePath'><img src=\"@picture_path\" class='profile'/></a>";
+	tpl+="<h4><a href='@profilePath'>@fullname</a></h4>";
 	tpl+="<div class='user-controls'>";		
-		tpl+="<a href='@gift_url'><img src=\""+url+"css/img/fixed/profile/gifticon.jpg\"/></a>"+"<a href='#'><img src=\""+url+"css/img/fixed/profile/icebreaker.png\"/></a>"+"<a href='#' class='winker' id='wink_@id'><img src=\""+url+"css/img/fixed/profile/winkicon.jpg\"/></a>"+"<a href='#'><img src=\""+url+"css/img/fixed/profile/messageicon.jpg\"/></a>";
+		tpl+="<a href='@gift_url'><img src=\""+url+"css/img/fixed/profile/gifticon.jpg\"/></a>"+"<a href='#'><img src=\""+url+"css/img/fixed/profile/icebreaker.png\"/></a>"+"<a href='#' class='winker' id='wink_@id'><img src=\""+url+"css/img/fixed/profile/winkicon.jpg\"/></a>"+"<a href='#' id='message_@messageid' class='match-messager'><img src=\""+url+"css/img/fixed/profile/messageicon.jpg\"/></a>";
 	tpl+="</div>";
 	tpl+="<span>@age years old</span><span>@address</span><span>@country</span><span>&nbsp;</span>"; 
 	if (item.PhotoUpdate.profile == "0"){
@@ -125,6 +128,7 @@ PhotoUpdatesView.prototype.getPhotoUpdatesTemplate = function(item){
 	}
     tpl+="<hr/></li>";	
 	var picture = url+"img/uploads/"+item.Member.id+"/default/profile_thumb_"+item.MemberProfile.picture_path;
+	var profile = url+"members/profile/"+item.Member.id;
 	var address = "";
 	if ($.trim(item.Member.address1)!=""){
 		address+=item.Member.address1+", ";
@@ -135,6 +139,9 @@ PhotoUpdatesView.prototype.getPhotoUpdatesTemplate = function(item){
 	if ($.trim(item.Member.state)!=""){
 		address+=item.Member.state;
 	}
+	tpl = tpl.replace("@messageid", item.Member.id);
+	tpl = tpl.replace("@profilePath", profile);
+	tpl = tpl.replace("@profilePicturePath", profile);
 	tpl = tpl.replace("@id", item.Member.id);
     tpl = tpl.replace("@picture_path", picture);
 	tpl = tpl.replace("@fullname", item.Member.firstname+" "+item.Member.lastname);
@@ -180,6 +187,50 @@ var MessageBoxHelper = {
 				$("#gift-box").html("");
 				$(data).appendTo("#gift-box").hide().fadeIn();
 			});
+			e.preventDefault();
+		});
+		$(".match-messager").live("click",function(e){
+			var id = $(this).attr("id");
+			var memberId = id.split("_");
+			$.get(qalanjo_url+"members/getMemberDetailsForMessage/"+memberId[1], function(data){
+				var member = $.parseJSON(data);
+				$("#full-name").html(member.Member.firstname+" "+member.Member.lastname);
+				$("#age").html(member.Member.age);
+				if ((member.Member.address1!="")&&(member.Member.city!="")){
+					$("#location1").html(member.Member.address1+" "+member.Member.city);	
+				}
+				$("#PrivateMessageToId").val(memberId[1]);
+				$("#location2").html(member.Member.state+" "+member.Country.name);
+				if ($.trim(member.Member.picturePath)!=""){
+					$("#profile-picture").html("<img src='"+qalanjo_url+"img/uploads/"+memberId[1]+"/default/profile_thumb_"+member.Member.picturePath+"'/>");
+				}else{
+					if (member.Member.gender_id==1){
+						$("#profile-picture").html("<img src='"+qalanjo_url+"/css/img/blue/index/s-men.png'/>");
+					}else{
+						$("#profile-picture").html("<img src='"+qalanjo_url+"/css/img/blue/index/s-women.png'/>");
+					}
+				}
+				if (QalanjoUserGlobal.authRole==2){
+					$("#composer").dialog(
+						{modal:true,
+						height:385,
+						width:500,
+						title:"Write your message",
+						show:"fade",
+						hide:"fade", 
+						buttons:{
+							Exit:function(){
+								$("#composer").dialog("close");
+							}
+						}}
+					);
+				}else{
+					$("#composer").dialog(
+						{modal:true, height:475, width:460, title:"Write your message to:", show:"fade", resizable:false, hide:"fade"}
+					);
+				}
+			});
+		
 			e.preventDefault();
 		});
 

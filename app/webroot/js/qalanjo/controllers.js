@@ -98,6 +98,7 @@ MembersController.prototype.loadCounters = function(){
 MembersController.prototype.loadCountersSuccess = function(data){
 	var counts = $.parseJSON(data);
 	$("#match-count").text(counts.matchCount);
+	QalanjoUserGlobal.authUserId = counts.role;
 }
 
 /**

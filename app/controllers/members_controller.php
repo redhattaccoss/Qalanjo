@@ -1682,6 +1682,7 @@ class MembersController extends AppController {
 			$response["photoCount"] = $count;
 			$response["inboxCount"] = $this->ReceiveMessage->find("count", array("conditions"=>array("ReceiveMessage.member_id"=>$member_id, "ReceiveMessage.message_status_id"=>2)));
 			$response["matchCount"] = $this->Match->countMatch($member_id, 1);
+			$response["role"] = $this->Member->getRole($member_id);
 			$this->set("response", json_encode($response));
 			$this->render ( "/elements/response", "ajax" );
 		}

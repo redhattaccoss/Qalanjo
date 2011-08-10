@@ -364,9 +364,12 @@
 	font-weight: bold;
 	margin-bottom: 0px;
 	display: inline-block;
-	color: #005F9D;
 	text-align: left;
 	font-family: Arial;
+}
+.user-info h4 a, .user-info h4 a:visited{
+	color: #005F9D;
+	text-decoration:none;
 }
 
 .user-info h3 {

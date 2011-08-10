@@ -12,7 +12,8 @@ var QalanjoGlobal = {
 	scrollHeight:""
 };
 var QalanjoUserGlobal = {
-	authUserId:""
+	authUserId:"",
+	authRole:-1
 }
 function clone(object) {
 	function F() {}
